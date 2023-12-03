@@ -1,0 +1,98 @@
+.login-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-datas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    height: 450px;
+    width: 300px;
+    border: 1px solid rgba(128, 128, 128, 0.263);
+}
+
+.login-datas .or{
+    margin-top: -10px;
+    width: 250px;
+    margin-bottom: 20px;
+}
+.login-datas .or p{
+    background: white;
+    position: relative;
+    top: -15px;
+    width: 15px;
+    padding: 5px;
+    left: 46%;
+}
+
+
+.login-form form{
+    margin-top: 15px;
+    display: flex;
+    width: 350px;
+    height: 350px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form .logo{
+    margin-bottom: 30px;
+}
+
+.login-datas form input{
+    margin-bottom: 10px;
+    text-indent: 10px;
+    width: 250px;
+    height: 30px;
+    border: 1px solid rgba(128, 128, 128, 0.694);
+    outline: none;
+    background: transparent;
+}
+
+.login-datas form input::placeholder{
+    color: #737373;
+    font-size: 11px;
+    text-indent: 10px;
+}
+
+.login-datas form button{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    width: 250px;
+    height: 30px;
+    border-radius: 10px;
+    color: white;
+    border: none;
+    background: #4CB5F9;
+}
+
+.login-container .page-change a{
+    color: #4CB5F9;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.login-form a{
+    color: #07609b;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.login-form p{
+    width: 260px;
+    font-size: 12px;
+    color: #737373;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.msgError{
+    text-align: center;
+    color: red;
+}
+  

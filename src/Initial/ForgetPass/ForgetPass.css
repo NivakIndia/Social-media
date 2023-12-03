@@ -1,0 +1,108 @@
+.forget-content-container{
+    max-width: 350px;
+    align-items: center;
+    margin-left: 36%;
+    position: relative;
+    margin-top: 100px;
+}
+.forget-container{
+    border: 1px solid #DBDBDB;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.forget-container .lock-icon{
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 60px;
+}
+.forget-container .heading{
+    font-size: medium;
+    font-weight: 900;
+    color: #000;
+}
+.forget-container p{
+    width: 260px;
+    font-size: 12px;
+    color: #737373;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.backlogin-container a,.backlogin-container button{
+    text-decoration: none;
+    background-color: white;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    margin-left: -7px;
+}
+.backlogin-container button{
+    border: 1px solid #DBDBDB;
+    border-radius: 2px;
+}
+.backlogin-container button:hover{
+    color: #737373;
+}
+
+.forget-container form input{
+    min-width: 260px;
+    margin-bottom: 7px;
+    height: 34px;
+    outline: none;
+    box-shadow: 0px 0px 0px .5px #DBDBDB;
+    border-radius: 2px;
+    border: none;
+    text-indent: 10px;
+    background-color: #FAFAFA;
+}
+
+.forget-container form input::placeholder{
+    color: #737373;
+    font-size: 11px;
+    text-indent: 10px;
+}
+.forget-container form button{
+    margin-top: 10px;
+    min-width: 265px;
+    height: 30px;
+    background-color: #4CB5F9;
+    outline: none;
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 7px;
+}
+.forget-container .horizontal-line{
+    content: ' ';
+    position: relative;
+    z-index: -1;
+    width: 260px;
+    height: .8px;
+    background-color: #73737349;
+}
+.forget-container .or{
+    color: #737373;
+    font-size: 13px;
+    z-index: 2;
+    font-weight: bold;
+    background-color: white;
+    padding: 0px 15px;
+    position: relative;
+    width: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.forget-container .create-account button{
+    color: #07609b;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin-bottom: 25px;
+}
+.msgError{
+    text-align: center;
+    color: red;
+}
