@@ -14,6 +14,7 @@ const Home = () => {
   return (
     <div>
         <h3>Welcome {user?.fullName}</h3>
+        <img src={api.defaults.baseURL+user?.profileURL} alt='profile' style={{width:"50px",height:"50px"}}/>
     </div>
   )
 }
