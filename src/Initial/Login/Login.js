@@ -3,18 +3,22 @@ import './Login.css'
 import api from "../../api/axiosConfig";
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie';
+import { BarLoader, SyncLoader } from 'react-spinners';
 
 const Login = () => {
+    const [loading, setloading] = useState(false)
+    const [loadingapi,setloadingapi] = useState(false)
+
     const navigate = useNavigate()
     const [allUsers, setallUsers] = useState();
-    const [loginError, setloginError] = useState()
+    const [msgError, setMsgError] = useState('');
     const [isNotVerified, setisNotVerified] = useState(false)
 
     const [userData, setuserData] = useState({
         login:'',
         password:''
     })
-    const [msgError, setMsgError] = useState('');
+    
 
     // HandleInputs
     const handleInputChange = (e) =>{
@@ -27,13 +31,23 @@ const Login = () => {
 
     // GetUser
     const getAllUsers = async () => {
-        const response = await api.get('/nivak/media/allusers/')
-        setallUsers(response.data)
+        try {
+            const response = await api.get('/nivak/media/allusers/')
+            setallUsers(response.data)
+            setloadingapi(false)
+            setloading(false)
+        } catch (error) {
+            setloading(false)
+            setloadingapi(true)
+        }
+        
     }
     // Login user
     const loginHandle =async (e) => {
+        
         e.preventDefault()
         try {
+            setloading(true)
             const loginToCheck = userData.login
             const passwordToCheck = userData.password
 
@@ -46,35 +60,56 @@ const Login = () => {
                 if (data?.password === passwordToCheck) {
                     if(data?.accountIsVerified){
                         Cookies.set('user',data?.userId,{expires: 2})
-                        navigate("/accounts/home/")
+                        setloading(false)
+                        navigate("/account/")
                     }
                     else{
+                        setloading(false)
                         setMsgError("*Email is not verified! ")
                         Cookies.set('userid',data?.userId,{expires:1})
                         setisNotVerified(true)
                     }
                 } else {
+                    setloading(false)
                     setMsgError("*Incorrect password")
                     setisNotVerified(false)
                 }
             }
             else{
+                setloading(false)
                 setMsgError("*User not found")
                 setisNotVerified(false)
             }
             
         } catch (error) {
-            console.log(error)
+            setloading(false)
             navigate('/')
         }
 
     }
 
     useEffect(()=>{
+        setloading(true)
         getAllUsers()
     },[])
   return (
-    <div className='login-container'>
+    <>
+        <div className='loading' style={loading?{display:'flex'}:{display:'none'}}>
+          <SyncLoader
+              color={'#36d7b7'}
+              loading={loading}
+          />
+        </div>
+        <div className='loading' style={loadingapi?{display:'flex'}:{display:'none'}}>
+          <p style={{color:'#ff0000aa'}}>Server Error please try later</p>
+          <br/>
+          <BarLoader
+              width={300}
+              color={'#ff0000aa'}
+              loading={loadingapi}
+          />
+        </div>
+        <div className='login-container'>
             <div className='login-datas' id='login'>
                 <div className='login-form'>
                     <form onSubmit={loginHandle}>
@@ -84,18 +119,20 @@ const Login = () => {
                         <input type='password' name='password' placeholder='password' required onChange={handleInputChange}/>
                         <button type='submit'>Log in</button>
                         {msgError && <div className='msgError' style={{marginTop:"-10px"}}>{msgError}{isNotVerified && <a href='/accounts/register/verify/' style={{textDecoration: 'none'}}>Verify?</a>}</div>}
+                        <br/>
                         <a href='/accounts/password/reset/'>Forget password?</a>
                     </form>
                 </div>
                 <div className='or'>
-                    <hr/>
                     <p>or</p>
                 </div>
+                <br/>
                 <div className='page-change'>
                     <p>Don't have an account? <a href='/accounts/register/'>Sign up</a></p>
                 </div>
             </div>
         </div>
+    </>
   )
 }
 

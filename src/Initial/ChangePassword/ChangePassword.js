@@ -5,14 +5,19 @@ import { RxCheckCircled, RxCrossCircled } from "react-icons/rx";
 import api from '../../api/axiosConfig'
 import './ChangePassword.css'
 import { useNavigate } from 'react-router-dom'
+import { BarLoader, SyncLoader } from 'react-spinners';
 
 
 const ChangePassword = () => {
+    const [loading, setloading] = useState(false)
+    const [loadingapi,setloadingapi] = useState(false)
+
     const navigate = useNavigate()
     const[user,setUser] = useState();
     const [msgError, setMsgError] = useState('');
     const [crtcode, setcrtcode] = useState()
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+   
 
     // Resend Timer
     const initialTimeLeft = 300; // Initial time in seconds
@@ -37,22 +42,18 @@ const ChangePassword = () => {
     const changePassword = async (e) =>{
         e.preventDefault();
         try {
-            const formData = new FormData
+            const formData = new FormData()
             formData.append("userid",user?.userId)
             formData.append("newpassword",userCode.password)
             await api.post("/nivak/media/password/reset/changepassword/",formData)
             .then(response => {
-                console.log('Success:', response.data);
-                
             })
             .catch((error) => {
-                console.error('Error:', error);
             });
             Cookies.remove('passid',{path:'/'})
             Cookies.set('user',user?.userId,{expires: 2})
-            navigate("/accounts/home/")
+            navigate("/account/")
         } catch (error) {
-            console.log(error);
             setMsgError("*Invalid Code");
         }        
     }
@@ -65,7 +66,7 @@ const ChangePassword = () => {
       localStorage.setItem('startTime', currentTime.toString());
       localStorage.setItem('timer', initialTimeLeft.toString());
 
-      await api.get(`/nivak/media/password/reset/changepassword/resendcoden/${user?.userId}/`)
+      await api.get(`/nivak/media/password/reset/changepassword/resendcode/${user?.userId}/`)
       getUsers()
     };
   
@@ -77,16 +78,23 @@ const ChangePassword = () => {
 
     // Get user by userId
     const getUsers = async () =>{
-      const response = await api.get(`/nivak/media/byuserid/${Cookies.get("passid")}/`)
-      setUser(response.data)
+      try {
+        const response = await api.get(`/nivak/media/byuserid/${Cookies.get("passid")}/`)
+        setUser(response.data)
+        setloadingapi(false)
+        setloading(false)
+      } catch (error) {
+        setloading(false)
+        setloadingapi(true)
+      }
     }
 
     // Check code is correct 
     const checkCode=()=>{
-        const codeToCheck = userCode.code;
+        const codeToCheck = Number(userCode.code);
         const originalCode = user?.forgetPassToken
         
-        if (codeToCheck == originalCode) {
+        if (codeToCheck === originalCode) {
             setcrtcode(true);
             setIsButtonDisabled(false)
         } else {
@@ -98,6 +106,7 @@ const ChangePassword = () => {
     
     // useEffects for Resend timing
     useEffect(() => {
+      setloading(true)
       getUsers()
       let timer;
   
@@ -145,6 +154,21 @@ const ChangePassword = () => {
 
   return (
     <div>
+        <div className='loading' style={loading?{display:'flex'}:{display:'none'}}>
+          <SyncLoader
+              color={'#36d7b7'}
+              loading={loading}
+          />
+        </div>
+        <div className='loading' style={loadingapi?{display:'flex'}:{display:'none'}}>
+          <p style={{color:'#ff0000aa'}}>Server Error please try later</p>
+          <br/>
+          <BarLoader
+              width={300}
+              color={'#ff0000aa'}
+              loading={loadingapi}
+          />
+        </div>
         <div className='passverify-content-container'>
             <div className='passverify-container'>
                 <TbPasswordUser className='passlock-icon'/>
@@ -159,9 +183,9 @@ const ChangePassword = () => {
                 </form>
                 <br/>
                 <br/>
-            </div>
-            <div className='passverify-backlogin-container'>
-                <a href='/'><button>Back to Login</button></a>
+                <div className='passverify-backlogin-container'>
+                    <a href='/'><button>Back to Login</button></a>
+                </div>
             </div>
         </div>
     </div>

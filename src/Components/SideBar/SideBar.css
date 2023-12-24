@@ -1,0 +1,281 @@
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: scroll;
+}
+
+/* Sidebar Logo */
+.sidebar_logo{
+    flex: 0.1;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar_logo>img{
+    width: 80px;
+    height: 30px;
+}
+
+/* Sidebar Content */
+.sidebar_content{
+    display: flex;
+    flex: 0.9;
+    flex-direction: column;
+    justify-content: left;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+/* Sidebar Icons */
+.sidebar_icons_{
+    width: 85%;
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 0px 2px 0px #747474;
+    transition: transform 300ms ease-in-out;
+    margin-bottom: 8%;
+}
+.sidebar_icons_:hover{
+    box-shadow: 0px 0px 18px 0px #747474;
+    transform: scale(1.10);
+}
+.sidebar_icons_>a{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.sidebar_icon{
+    width: 27px;
+    height: 27px;
+}
+.sidebar_icons_>a>span{
+    margin-left: 10px;
+}
+
+/* New Post */
+.newpost_overlay{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: #000000a0;
+    z-index: 9999999;
+}
+.newpost_overlay>button{
+    position: absolute;
+    right: 1%;
+    top: 2%;
+    font-size: 30px;
+    background: transparent;
+    border: none;
+    color: red;
+}
+
+/* New Post Create */
+.newpost_create{
+    display: flex;
+    flex-direction: column;
+    width: 424px;
+    height: 465px;
+    border-radius: 15px;
+    transition: newpostcreate 3s ease-in-out;
+}
+
+@keyframes newpostcreate {
+    from{
+        transform: scale(0);
+    }
+    to{
+        transform: scale(1);
+    }
+}
+
+/* New Post Create Top */
+.newpost_create_top{
+    flex: 0.09;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0.3px 0px 0px #747474;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+.newpost_create_top>h2{
+    padding: 0px 10px;
+    cursor: pointer;
+}
+.newpost_create_top>button{
+    background-color: transparent;
+    border: none;
+    color: #0099ff;
+    padding: 0px 10px;
+}
+
+/* New Post Create Bottom */
+.newpost_create_bottom{
+    flex: 0.91;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.newpost_create_bottom>h1{
+    font-size: 100px;
+}
+.newpost_create_bottom>label>button{
+    background-color: #0099ff;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    margin-top: 15px;
+}
+.newpost_create_bottom>.postcrop_options{
+    position: sticky;
+    margin-top: -45%;
+    bottom: 5%;
+    margin-left: -70%;
+}
+.newpost_create_bottom>.postcrop_options>p{
+    font-size: 24px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    margin-top: 5px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.658);
+    transition: transform 200ms ease-in-out;
+}
+.newpost_create_bottom>.postcrop_options>p:hover{
+    background-color: rgba(0, 0, 0, 0.781);
+    transform: scale(1.05);
+    box-shadow: 0px 0px 18px 2px #ffffff;
+}
+
+.newpost_create_bottom>.postcrop_options>.postcrop_options_select{
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 120px;
+    background-color: #000000a9;
+    border-radius: 10px;
+    align-items: flex-start;
+    justify-content: center;
+}
+.newpost_create_bottom>.postcrop_options>.postcrop_options_select>p{
+    box-shadow: 0px 0.3px 0px 0px #747474;
+    display: flex;
+    align-items: center;
+    padding-top: 5px;
+    padding-left: 5px;
+    width: 95%;
+    cursor: pointer;
+}
+.newpost_create_bottom>.postcrop_options>.postcrop_options_select>p>.select_icon{
+    font-size: 20px;
+    padding-left: 5px;
+}
+
+/* New Post Share */
+@keyframes newpostshare {
+    0%{
+        width: 0px;
+    }
+    100%{
+        width: 824px;
+    }
+}
+.newpost_share{
+    display: flex;
+    flex-direction: column;
+    width: 824px;
+    height: 465px;
+    border-radius: 15px;
+    transition: newpostshare 3s ease-in-out;
+}
+
+
+/* New Post Share Top*/
+.newpost_share_top{
+    flex: 0.09;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0.3px 0px 0px #747474;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+}
+.newpost_share_top>h2{
+    padding: 0px 10px;
+    cursor: pointer;
+}
+.newpost_share_top>button{
+    background-color: transparent;
+    border: none;
+    color: #0099ff;
+    padding: 0px 10px;
+}
+
+/* New Post Share Bottom */
+.newpost_share_bottom{
+    flex: 0.91;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+/* New Post Share Bottom left*/
+.newpost_share_bottom_left{
+    display: flex;
+    flex: 0.6;
+    height: 100%;
+}
+
+/* New Post Share Bottom Right*/
+.newpost_share_bottom_right{
+    flex: 0.4;
+    width: 100%;
+}
+.newpost_share_bottom_right_top{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 15%;
+    align-items: center;
+}
+.newpost_share_bottom_right_top>.description_avatar{
+    width: 30px;
+    margin-left: 10px;
+    margin-right: 15px;
+    height: 30px;
+} 
+.newpost_share_bottom_right_top>.description_avatar>img{
+    width: 30px;
+    height: 30px;
+} 
+.newpost_share_bottom_right>textarea{
+    margin-top: 10px;
+    width: 90%;
+    height: 30%;
+    margin-left: 5%;
+    resize: none;
+    color: #747474;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: 0px 0.3px 0px 0px #747474;
+}
+
+

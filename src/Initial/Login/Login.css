@@ -13,21 +13,7 @@
     padding: 15px;
     height: 450px;
     width: 300px;
-    border: 1px solid rgba(128, 128, 128, 0.263);
-}
-
-.login-datas .or{
-    margin-top: -10px;
-    width: 250px;
-    margin-bottom: 20px;
-}
-.login-datas .or p{
-    background: white;
-    position: relative;
-    top: -15px;
-    width: 15px;
-    padding: 5px;
-    left: 46%;
+    box-shadow: 0px 0px 18px 0px #747474;
 }
 
 
@@ -46,16 +32,24 @@
 
 .login-datas form input{
     margin-bottom: 10px;
+    color: #747474;
     text-indent: 10px;
     width: 250px;
     height: 30px;
-    border: 1px solid rgba(128, 128, 128, 0.694);
+    box-shadow: 0px 0px 1px 0px #747474;
+    transition: transform 300ms ease-in-out;
+    border: none;
     outline: none;
     background: transparent;
 }
 
+.login-datas form input:focus{
+    box-shadow: 0px 0px 8px 0px #747474;
+    transform: scale(1.05);
+}
+
 .login-datas form input::placeholder{
-    color: #737373;
+    color: #747474;
     font-size: 11px;
     text-indent: 10px;
 }
@@ -68,17 +62,17 @@
     border-radius: 10px;
     color: white;
     border: none;
-    background: #4CB5F9;
+    background: #0099ff;
 }
 
 .login-container .page-change a{
-    color: #4CB5F9;
+    color: #0099ff;
     cursor: pointer;
     text-decoration: none;
 }
 
 .login-form a{
-    color: #07609b;
+    color: #0099ff;
     cursor: pointer;
     text-decoration: none;
 }
@@ -86,7 +80,7 @@
 .login-form p{
     width: 260px;
     font-size: 12px;
-    color: #737373;
+    color: #747474;
     text-align: center;
     margin-bottom: 15px;
 }

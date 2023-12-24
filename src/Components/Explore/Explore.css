@@ -1,0 +1,48 @@
+.explore{
+    display: flex;
+    flex-direction: row;
+}
+
+/* Spliting the Explore */
+.explore_sidebar{
+    flex: 0.2;
+    box-shadow: 0.3px 0px 0px 0px #747474;
+}
+.explore_content{
+    flex: 0.8;
+    height: 100vh;
+    width: 100%;
+    overflow: scroll;
+}
+
+.explore_row{
+    overflow: scroll;
+}
+
+.explore_row::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.explore_column{
+    float: left;
+    display: block;
+    margin: 15px;
+}
+.explore_card{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+.explore_card,.explore_card>.explore_media{
+    width: 300px;
+    height: 350px;
+    object-fit: fill;
+}
+.explore_media_icon{
+    color:  white;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

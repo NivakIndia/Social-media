@@ -1,0 +1,56 @@
+.post_row{
+    overflow: scroll;
+}
+.post_row::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.post_column{
+    float: left;
+    display: block;
+    margin: 5px;
+}
+.post_card{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+.post_card,.post_card>.post_media{
+    width: 273.33px;
+    height: 273.33px;
+    object-fit: fill;
+}
+
+.reel_row{
+    overflow: scroll;
+}
+.reel_row::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.reel_column{
+    float: left;
+    display: block;
+    margin: 5px;
+}
+.reel_card{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+.reel_card,.reel_card>.post_media{
+    width: 204px;
+    height: 317.54px;
+    object-fit: fill;
+}
+
+.reel_media_icon{
+    color:  white;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

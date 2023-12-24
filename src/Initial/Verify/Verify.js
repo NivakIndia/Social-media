@@ -4,9 +4,13 @@ import {TfiEmail} from 'react-icons/tfi'
 import api from '../../api/axiosConfig'
 import './Verify.css'
 import { useNavigate } from 'react-router-dom'
+import { BarLoader, SyncLoader } from 'react-spinners'
 
 
 const Verify = () => {
+    const [loading, setloading] = useState(false)
+    const [loadingapi,setloadingapi] = useState(false)
+
     const navigate = useNavigate()
     const userid = Cookies.get('userid');
     const[user,setUser] = useState();
@@ -32,22 +36,24 @@ const Verify = () => {
 
     // Check Verification
     const checkVerification = async (e) =>{
-        console.log('Checking verification...');
+        setloading(true)
         e.preventDefault();
-        const vCode = user?.verificationToken
-        const code = userCode['code']
-        if(vCode == code){
+        const vCode = Number(user?.verificationToken)
+        const code = userCode.code
+        if(vCode === code){
           try {
             await api.get(`/nivak/media/register/verify/${userid}/`)
             Cookies.remove('userid',{path:'/'})
             Cookies.set('user',userid,{expires: 2})
-            navigate("/accounts/home/")
+            setloading(false)
+            navigate("/account/")
           } catch (error) {
-            console.log(error);
+            setloading(false)
             setMsgError("*Invalid Code");
           }
         }
         else {
+          setloading(false)
           setMsgError("*Incorrect Code")
         }          
     }
@@ -72,12 +78,21 @@ const Verify = () => {
 
     // Get user by userId
     const getUsers = async () =>{
-      const response = await api.get(`/nivak/media/byuserid/${Cookies.get("userid")}/`)
-      setUser(response.data)
+      try {
+        const response = await api.get(`/nivak/media/byuserid/${Cookies.get("userid")}/`)
+        setUser(response.data)
+        setloadingapi(false)
+        setloading(false)
+      } catch (error) {
+        setloading(false)
+        setloadingapi(true)
+      }
+      
     }
     
     // useEffects for Resend timing
     useEffect(() => {
+      setloading(true)
       getUsers()
       let timer;
   
@@ -121,6 +136,21 @@ const Verify = () => {
 
   return (
     <div>
+        <div className='loading' style={loading?{display:'flex'}:{display:'none'}}>
+          <SyncLoader
+              color={'#36d7b7'}
+              loading={loading}
+          />
+        </div>
+        <div className='loading' style={loadingapi?{display:'flex'}:{display:'none'}}>
+          <p style={{color:'#ff0000aa'}}>Server Error please try later</p>
+          <br/>
+          <BarLoader
+              width={300}
+              color={'#ff0000aa'}
+              loading={loadingapi}
+          />
+        </div>
         <div className='verify-content-container'>
             <div className='verify-container'>
                 <TfiEmail className='lock-icon'/>
@@ -134,9 +164,9 @@ const Verify = () => {
                 </form>
                 <br/>
                 <br/>
-            </div>
-            <div className='verify-backlogin-container'>
-                <a href='/'><button>Back to Login</button></a>
+                <div className='verify-backlogin-container'>
+                    <a href='/'><button>Back to Login</button></a>
+                </div>
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@
     margin-top: 100px;
 }
 .forget-container{
-    border: 1px solid #DBDBDB;
+    box-shadow: 0px 0px 18px 0px #747474;
     border-radius: 2px;
     display: flex;
     flex-direction: column;
@@ -21,46 +21,57 @@
 .forget-container .heading{
     font-size: medium;
     font-weight: 900;
-    color: #000;
+    color: #747474;
 }
 .forget-container p{
     width: 260px;
     font-size: 12px;
-    color: #737373;
+    color: #747474;
     text-align: center;
     margin-bottom: 15px;
 }
+.backlogin-container{
+    background: #60606060;
+    width: 100%;
+    height: 40px;
+}
 .backlogin-container a,.backlogin-container button{
     text-decoration: none;
-    background-color: white;
+    color: white;
     outline: none;
     width: 100%;
-    height: 100%;
-    padding: 15px;
-    margin-left: -7px;
 }
 .backlogin-container button{
-    border: 1px solid #DBDBDB;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
     border-radius: 2px;
 }
-.backlogin-container button:hover{
-    color: #737373;
+.backlogin-container:hover{
+    box-shadow: 0px 0px 8px 0px #747474;
 }
 
 .forget-container form input{
+    background: transparent;
     min-width: 260px;
     margin-bottom: 7px;
+    color: #747474;
     height: 34px;
     outline: none;
-    box-shadow: 0px 0px 0px .5px #DBDBDB;
+    box-shadow: 0px 0px 1px 0px #747474;
+    transition: transform 300ms ease-in-out;
     border-radius: 2px;
     border: none;
     text-indent: 10px;
-    background-color: #FAFAFA;
+}
+.forget-container form input:focus{
+    box-shadow: 0px 0px 8px 0px #747474;
+    transform: scale(1.05);
 }
 
 .forget-container form input::placeholder{
-    color: #737373;
+    color: #747474;
     font-size: 11px;
     text-indent: 10px;
 }
@@ -68,7 +79,7 @@
     margin-top: 10px;
     min-width: 265px;
     height: 30px;
-    background-color: #4CB5F9;
+    background-color: #0099ff;
     outline: none;
     border: none;
     color: white;
@@ -81,14 +92,13 @@
     z-index: -1;
     width: 260px;
     height: .8px;
-    background-color: #73737349;
+    background-color: #60606060;
 }
 .forget-container .or{
-    color: #737373;
+    color: #747474;
     font-size: 13px;
     z-index: 2;
     font-weight: bold;
-    background-color: white;
     padding: 0px 15px;
     position: relative;
     width: 20px;
@@ -96,7 +106,7 @@
     margin-bottom: 15px;
 }
 .forget-container .create-account button{
-    color: #07609b;
+    color: #0099ff;
     background-color: transparent;
     border: none;
     outline: none;
