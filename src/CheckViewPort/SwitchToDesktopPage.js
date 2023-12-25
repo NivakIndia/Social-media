@@ -15,7 +15,7 @@ const SwitchToDesktopPage = () => {
     };
   }, []);
 
-  if (windowWidth < 1000) {
+  if (windowWidth < 800) {
     return (
       <div style={{ textAlign: 'center', width:"100vw", height:"100vh", display:"flex",alignItems:'center',justifyContent:'center',position:'fixed', zIndex:'9999999', background:'#000000' }}>
         <div>

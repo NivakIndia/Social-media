@@ -210,7 +210,7 @@ const ReplyComment=({replycomment,time,commentId,commentreply,user,postid,getpos
                 </div>
                 <div className='comment_middle_intraction'>
                     {replycomment?.replyLikes && <p>{replycomment?.replyLikes.length} likes</p>}
-                    <p onClick={()=>commentreply(commentId,replycommentuser.userName)}>replay</p>
+                    <p onClick={()=>commentreply(commentId,replycommentuser.userName)}>reply</p>
                 </div>
             </div>
 

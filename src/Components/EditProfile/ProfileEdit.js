@@ -150,8 +150,8 @@ const ProfileEdit = () => {
                         loading={loadingpart}
                       />
                     </div>
-                    <Avatar>
-                        {user?.profileURL ? <img src={user?.profileURL}/>:<img src='/profile.png'/>}
+                    <Avatar style={{width:"70px",height:"70px"}}>
+                        {user?.profileURL ? <img src={user?.profileURL} style={{width:"70px",height:"70px"}}/>:<img src='/profile.png' style={{width:"70px",height:"70px"}}/>}
                     </Avatar>
                   </div>
                   <div className='content'>
@@ -192,7 +192,7 @@ const ProfileEdit = () => {
               </div>
 
               <div className='biometric_sumbit'>
-                  <button onClick={sendBiometric}>Sumbit</button>
+                  <button onClick={sendBiometric}>Submit</button>
               </div>
 
             </div>

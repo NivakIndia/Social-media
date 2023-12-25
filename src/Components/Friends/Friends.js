@@ -141,7 +141,7 @@ const EachFriends = ({user,currentuser}) => {
     return(
         <>
             <div  className='eachfriend'>
-                <div className='loading-parts' style={loadingpart ? { display: 'flex', width:'100%',height:'100%'} : { display: 'none' }}>
+                <div className='loading-parts' style={loadingpart ? { display: 'flex', width:'27vw',height:'65vh', marginLeft:"-12px", marginTop:'-80px'} : { display: 'none' }}>
                     <DotLoader
                     size={50}
                     color={'#ffffff'}
