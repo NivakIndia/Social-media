@@ -42,5 +42,8 @@
 .frontpage_left_bottom_cards{
     display: block;
     width: 470px;
+    height: 100vh;
+    overflow: scroll;
+    scroll-behavior: smooth;
     height: fit-content;
 }
