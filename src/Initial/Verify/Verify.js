@@ -38,8 +38,8 @@ const Verify = () => {
     const checkVerification = async (e) =>{
         setloading(true)
         e.preventDefault();
-        const vCode = Number(user?.verificationToken)
-        const code = userCode.code
+        const vCode = user?.verificationToken
+        const code = Number(userCode.code)
         if(vCode === code){
           try {
             await api.get(`/nivak/media/register/verify/${userid}/`)
