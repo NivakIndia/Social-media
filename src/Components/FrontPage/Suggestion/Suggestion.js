@@ -67,8 +67,8 @@ const Suggestion = () => {
             
             <div className='suggestion_top_avatar'>
               <a href={`/account/profile/${user?.userName}/`}>
-                <Avatar>
-                    {user?.profileURL ? <img src={user?.profileURL}/> : <img src='/profile.png'/>}
+                <Avatar style={{width:'42px',height:'42px'}}>
+                    {user?.profileURL ? <img src={user?.profileURL} style={{width:'42px',height:'42px'}}/> : <img src='/profile.png' style={{width:'42px',height:'42px'}}/>}
                 </Avatar>
               </a>
             </div>
@@ -100,8 +100,8 @@ const Suggestion = () => {
                     <div  className='suggestion_bottom' key={index}>
                       <div className='suggestion_bottom_avatar'>
                         <a href={`/account/profile/${alluser?.userName}/`}>
-                          <Avatar>
-                              {alluser?.profileURL ? <img src={alluser?.profileURL}/> : <img src='/profile.png'/>}
+                          <Avatar style={{width:'42px',height:'42px'}}>
+                              {alluser?.profileURL ? <img src={alluser?.profileURL} style={{width:'42px',height:'42px'}}/> : <img src='/profile.png' style={{width:'42px',height:'42px'}}/>}
                           </Avatar>
                         </a>
                       </div>

@@ -112,8 +112,8 @@
     justify-content: flex-end;
 }
 .suggestion_bottom_avatar>a>.css-2s90m6-MuiAvatar-root,.suggestion_bottom_avatar>a>.css-2s90m6-MuiAvatar-root>img{
-    width: 42px;
-    height: 42px;
+    width: 42px !important;
+    height: 42px !important;
 }
 
 .suggestion_bottom_content{

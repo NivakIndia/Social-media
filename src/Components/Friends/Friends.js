@@ -151,8 +151,8 @@ const EachFriends = ({user,currentuser}) => {
 
                 <div className='eachfriend_avatar'>
                 <a href={`/account/profile/${eachfriend?.userName}/`}>
-                    <Avatar>
-                        {eachfriend?.profileURL ? <img src={eachfriend?.profileURL}/> : <img src='/profile.png'/>}
+                    <Avatar style={{width:'42px',height:'42px'}}>
+                        {eachfriend?.profileURL ? <img src={eachfriend?.profileURL} style={{width:'42px',height:'42px'}}/> : <img src='/profile.png' style={{width:'42px',height:'42px'}}/>}
                     </Avatar>
                 </a>
                 </div>
