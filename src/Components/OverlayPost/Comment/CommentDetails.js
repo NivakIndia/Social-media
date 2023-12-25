@@ -106,7 +106,7 @@ const CommentDetails = ({comment,user,postid,getpost,commentreplyfunction}) => {
                 </div>
                 <div className='comment_middle_intraction'>
                     {comment?.commentLikes && <p>{comment?.commentLikes.length} likes</p>}
-                    <p onClick={()=>commentreplyfunction(comment?.commentId,commentuser.userName)}>replay</p>
+                    <p onClick={()=>commentreplyfunction(comment?.commentId,commentuser.userName)}>reply</p>
                 </div>
                 {   comment?.commentReplies.length>0 &&
                     <>
