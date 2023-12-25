@@ -90,6 +90,7 @@ const Login = () => {
 
     useEffect(()=>{
         setloading(true)
+        Cookies.remove('user')
         getAllUsers()
     },[])
   return (
