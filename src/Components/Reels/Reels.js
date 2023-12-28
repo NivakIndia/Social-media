@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 import { LazyLoadComponent, LazyLoadImage } from 'react-lazy-load-image-component'
 import ReactPlayer from 'react-player'
 import { useInView } from 'react-intersection-observer'
-import { FaHeart, FaPaperPlane, FaPause, FaPlay, FaRegBookmark, FaRegComment, FaRegHeart, FaVolumeMute, FaVolumeUp } from 'react-icons/fa'
+import { FaBookmark, FaHeart, FaPaperPlane, FaPause, FaPlay, FaRegBookmark, FaRegComment, FaRegHeart, FaVolumeMute, FaVolumeUp } from 'react-icons/fa'
 import { BsThreeDots } from 'react-icons/bs'
 import { Avatar } from '@mui/material'
 
@@ -186,6 +186,22 @@ const ReelsPost = ({postid,handleOverlayPost}) =>{
     } catch (error) {
     }
   }
+  // SavePost
+  const savePost= async()=>{
+    const formData = new FormData()
+    formData.append("postid",post?.postId)
+    formData.append("userid",user?.userId)
+    try {
+        await api.post('/nivak/media/savepost/',formData,{
+            headers: {
+                'Content-Type' : 'form-data',
+            }
+        })
+        getUser()
+    } catch (error) {
+        
+    }
+}
 
   useEffect(()=>{
     getData()
@@ -257,7 +273,7 @@ const ReelsPost = ({postid,handleOverlayPost}) =>{
                 <p onClick={postIntraction}>{post?.postLikes.includes(user?.userId)  ?<FaHeart style={{color:'red'}}/>:<FaRegHeart/>}<span>{post?.postLikes?.length}</span></p>
                 <p onClick={() => {handleOverlayPost(post?.postId); setplay((prev)=> !prev)}}><FaRegComment/><span>{post?.postComments?.length}</span></p>
                 <p><FaPaperPlane/></p>
-                <p><FaRegBookmark/></p>
+                <p onClick={savePost}>{user?.savedPost && user?.savedPost?.includes(post?.postId)? <FaBookmark/> : <FaRegBookmark/>}</p>
                 <p><BsThreeDots/></p>
             </div>
           </div>

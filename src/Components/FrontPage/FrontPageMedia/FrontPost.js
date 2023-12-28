@@ -4,12 +4,14 @@ import './FrontPost.css'
 import { DotLoader } from 'react-spinners'
 import { Avatar } from '@mui/material'
 import { BsThreeDots } from "react-icons/bs";
-import { FaHeart, FaPaperPlane, FaPause, FaPlay, FaRegBookmark, FaRegComment, FaRegHeart, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
+import { FaBookmark, FaHeart, FaPaperPlane, FaPause, FaPlay, FaRegBookmark, FaRegComment, FaRegHeart, FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 import { LazyLoadComponent, LazyLoadImage } from 'react-lazy-load-image-component'
 import { useInView } from 'react-intersection-observer'
 import ReactPlayer from 'react-player'
 import Cookies from 'js-cookie'
 import OverlayPost from '../../OverlayPost/OverlayPost'
+import SockJS from 'sockjs-client'
+import { Stomp } from 'stompjs/lib/stomp'
 
 const FrontPost = ({post}) => {
     const [loadingpart, setloadingpart] = useState(true);
@@ -159,11 +161,46 @@ const FrontPost = ({post}) => {
         setplay(true)
     }
 
+    // Save Post 
+    const savePost= async()=>{
+        const formData = new FormData()
+        formData.append("postid",post?.postId)
+        formData.append("userid",isUser?.userId)
+        try {
+            await api.post('/nivak/media/savepost/',formData,{
+                headers: {
+                    'Content-Type' : 'form-data',
+                }
+            })
+            getPost()
+            getUser()
+        } catch (error) {
+            
+        }
+    }
+
     // useEffects
-    useEffect(()=>{
-        getUser()
-        getPost()
-    },[])
+    useEffect(() => {
+        getUser();
+        getPost();
+    
+        const socket = new SockJS("http://localhost:8080/ws");
+        
+        const stompClient = Stomp.over(socket);
+    
+        stompClient.connect({}, () => {
+            console.log("Connected to websocket");
+            stompClient.subscribe("/function/intraction", (event) => {
+                console.log("Post Liked event received: ", event);
+                getPost();
+            });
+            stompClient.subscribe("/function/postcomment", (event) => {
+                console.log("Post Comment event received: ", event);
+                getPost();
+            });
+        });
+        
+    }, []);
     
     
   return (
@@ -268,7 +305,7 @@ const FrontPost = ({post}) => {
                         <p><FaPaperPlane/></p>
                     </div>
                     <div className='right_intraction'>
-                        <p><FaRegBookmark/></p>
+                        <p onClick={savePost}>{isUser?.savedPost && isUser?.savedPost?.includes(post?.postId)? <FaBookmark/> : <FaRegBookmark/>}</p>
                     </div>
                 </div>
 

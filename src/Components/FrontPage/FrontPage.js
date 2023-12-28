@@ -7,6 +7,7 @@ import Cookies from 'js-cookie'
 import FrontPost from './FrontPageMedia/FrontPost'
 import Suggestion from './Suggestion/Suggestion'
 
+
 const FrontPage = () => {
   const [loading, setloading] = useState(false)
   

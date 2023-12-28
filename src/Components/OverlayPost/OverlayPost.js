@@ -7,8 +7,10 @@ import { DotLoader, SyncLoader } from 'react-spinners'
 import { LazyLoadComponent, LazyLoadImage } from 'react-lazy-load-image-component'
 import { Avatar } from '@mui/material';
 import { BsThreeDots } from 'react-icons/bs';
-import { FaHeart, FaPaperPlane, FaRegBookmark, FaRegComment, FaRegHeart } from 'react-icons/fa';
+import { FaBookmark, FaHeart, FaPaperPlane, FaRegBookmark, FaRegComment, FaRegHeart } from 'react-icons/fa';
 import CommentDetails from './Comment/CommentDetails';
+import SockJS from 'sockjs-client'
+import { Stomp } from 'stompjs/lib/stomp'
 
 const OverlayPost = ({onClose,postid}) => {
     const [postuser, setpostuser] = useState()
@@ -174,11 +176,57 @@ const OverlayPost = ({onClose,postid}) => {
         } catch (error) {
         }
     }
+    // Save Post
+    const savePost= async()=>{
+        const formData = new FormData()
+        formData.append("postid",post?.postId)
+        formData.append("userid",user?.userId)
+        try {
+            await api.post('/nivak/media/savepost/',formData,{
+                headers: {
+                    'Content-Type' : 'form-data',
+                }
+            })
+            getPost()
+            getUserData()
+        } catch (error) {
+            
+        }
+    }
 
     useEffect(() => {
         setloading(true)
         getPost()
         getUserData()
+
+        const socket = new SockJS("http://localhost:8080/ws");
+        
+        const stompClient = Stomp.over(socket);
+    
+        stompClient.connect({}, () => {
+            console.log("Connected to websocket");
+            stompClient.subscribe("/function/intraction", (event) => {
+                console.log("Post Liked event received: ", event);
+                getPost();
+            });
+            stompClient.subscribe("/function/postcomment", (event) => {
+                console.log("Post Comment event received: ", event);
+                getPost()
+            });
+            stompClient.subscribe("/function/commentintraction", (event) => {
+                console.log("Post Comment event received: ", event);
+                getPost()
+            });
+            stompClient.subscribe("/function/postreplycomment", (event) => {
+                console.log("Post Comment event received: ", event);
+                getPost()
+            });
+            stompClient.subscribe("/function/replycommentintraction", (event) => {
+                console.log("Post Comment event received: ", event);
+                getPost()
+            });
+        });
+
     }, [])
 
     
@@ -307,7 +355,7 @@ const OverlayPost = ({onClose,postid}) => {
                                 <p><FaPaperPlane/></p>
                             </div>
                             <div className='overlaypost_right_intraction'>
-                                <p><FaRegBookmark/></p>
+                            <p onClick={savePost}>{user?.savedPost && user?.savedPost?.includes(post?.postId)? <FaBookmark/> : <FaRegBookmark/>}</p>
                             </div>
                         </div>
 

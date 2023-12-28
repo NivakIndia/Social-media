@@ -41,9 +41,13 @@
 }
 .frontpage_left_bottom_cards{
     display: block;
-    width: 470px;
+    width: 480px;
     height: 100vh;
-    overflow: scroll;
+    overflow-y: scroll;
+    display: flex;
+    overflow-x: hidden;
+    align-items: center;
+    flex-direction: column;
     scroll-behavior: smooth;
     height: fit-content;
 }

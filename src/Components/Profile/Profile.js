@@ -11,12 +11,16 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import {SyncLoader} from "react-spinners";
 import MediaView from './ProfileMediaShow/MediaView'
 import Friends from '../Friends/Friends'
+import { FaBookmark } from 'react-icons/fa'
 
 const Profile = () => {
     const [user, setuser] = useState()
     const [posts, setposts] = useState()
     const [isUser, setisUser] = useState()
-    const [inPost, setinPost] = useState(true)
+    const [inPost, setinPost] = useState('post')
+    const [isPost, setisPost] = useState(true)
+    const [isReels,setisReels] = useState(false)
+    const [isSaves, setisSaves] = useState(false)
     const [loading, setloading] = useState(false)
 
     // Get userName from PathURL
@@ -149,14 +153,15 @@ const Profile = () => {
 
                 {/* Profile Content Middle */}
                 <div className='profile_middle'>
-                    <p className={inPost?'in':''} onClick={()=>setinPost(true)}><BsGrid3X3/> <span>Post</span></p>
-                    <p className={!inPost?'in':''} onClick={()=>setinPost(false)}><BsPlayBtnFill/> <span>Reels</span></p>
+                    <p className={isPost ?'in':''} onClick={()=>{setisPost(true); setisSaves(false); setisReels(false); setinPost('post')}}><BsGrid3X3/> <span>POSTS</span></p>
+                    <p className={isReels ?'in':''} onClick={()=>{setisPost(false); setisReels(true); setisSaves(false); setinPost('reels')}}><BsPlayBtnFill/> <span>REELS</span></p>
+                    <p className={isSaves ?'in':''} onClick={()=>{setisPost(false); setisReels(false); setisSaves(true); setinPost('saves')}}><FaBookmark/> <span>SAVED</span></p>
                 </div>
                 
                 {/* Profile Content Bottom */}
                 <div className='profile_bottom'>
                     <div className='profile_bottom_container'>
-                        <MediaView inPost={inPost} posts={posts}/>
+                        <MediaView inPost={inPost} posts={posts} user={user} getuser={getUser}/>
                     </div>
                 </div>
 
