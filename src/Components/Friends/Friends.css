@@ -128,3 +128,10 @@
     font-size: 12px;
     color: #0099ff;
 }
+
+@media only screen and (max-width: 768px) {
+    .friend{
+        width: 80vw;
+        height: 50vh;
+    }
+}

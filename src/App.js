@@ -11,13 +11,11 @@ import ProfileEdit from './Components/EditProfile/ProfileEdit'
 import OverlayPost from './Components/OverlayPost/OverlayPost'
 import Explore from './Components/Explore/Explore'
 import Reels from './Components/Reels/Reels'
-import SwitchToDesktopPage from './CheckViewPort/SwitchToDesktopPage'
 
 
 const App = () => {
   return (
     <>
-    <SwitchToDesktopPage/>
     <BrowserRouter>
       <Routes>
           <Route path='/' element={<Login/>}/>

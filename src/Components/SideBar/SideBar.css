@@ -56,18 +56,32 @@
 .sidebar_icons_>a>span{
     margin-left: 10px;
 }
+.sidebar_icons_>a>sup{
+    background-color: #ff0000;
+    width: 10px;
+    height: 10px;
+    font-size: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: relative;
+    margin-left: -10px;
+    top: -10px;
+}
 
 /* New Post */
 .newpost_overlay{
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    background-color: #000000a0;
-    z-index: 9999999;
+    background-color: rgba(0, 0, 0, 0.795); /* Semi-transparent black background */
+    z-index: 9999;
 }
 .newpost_overlay>button{
     position: absolute;
@@ -279,3 +293,47 @@
 }
 
 
+
+
+/* For Mobile View */
+@media only screen and (max-width: 768px){
+    .sidebar{
+        display: flex;
+        height: 50px;
+        flex-direction: none;
+    }
+    
+    /* Sidebar Logo */
+    .sidebar_logo{
+        display: none;
+    }
+    
+    /* Sidebar Content */
+    .sidebar_content{
+        display: flex;
+        flex-direction: row;
+        height: 40px;
+        justify-content: space-evenly;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    
+    /* Sidebar Icons */
+    .sidebar_icons_{
+        width: fit-content;
+        box-shadow: 0px 0px 2px 0px #747474;
+        margin-bottom: 0;
+    }
+    .sidebar_icons_>a>span{
+        display: none;
+    }
+
+    /* New Post Create */
+    .newpost_create{
+        width: 324px;
+        height: 365px;
+    }
+    .newpost_share{
+        height: 365px;
+    }
+}

@@ -141,14 +141,6 @@ const EachFriends = ({user,currentuser}) => {
     return(
         <>
             <div  className='eachfriend'>
-                <div className='loading-parts' style={loadingpart ? { display: 'flex', width:'27vw',height:'65vh', marginLeft:"-12px", marginTop:'-80px'} : { display: 'none' }}>
-                    <DotLoader
-                    size={50}
-                    color={'#ffffff'}
-                    loading={loadingpart}
-                    />
-                </div>
-
                 <div className='eachfriend_avatar'>
                 <a href={`/account/profile/${eachfriend?.userName}/`}>
                     <Avatar style={{width:'42px',height:'42px'}}>

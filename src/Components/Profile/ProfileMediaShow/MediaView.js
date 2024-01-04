@@ -59,7 +59,7 @@ const MediaView = ({ inPost, posts, user, getuser }) => {
                   <div className='post_cards'>
                     <div className='post_card' onClick={() => handleOverlayPost(post?.postId)}>
                       {isImage && (
-                          <>
+                          <div className='post_card_'>
                               <div className='loading-parts' style={loadingpart ? { display: 'flex', width:'273.33px',height:'273.33px'} : { display: 'none' }}>
                                   <DotLoader
                                   size={50}
@@ -77,7 +77,7 @@ const MediaView = ({ inPost, posts, user, getuser }) => {
                                   placeholderSrc={post?.postURL}
                                   className='post_media'
                               />
-                          </>
+                          </div>
                       )}
 
                       {isVideo && (

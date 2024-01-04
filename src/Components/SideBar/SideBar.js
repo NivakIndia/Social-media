@@ -12,6 +12,9 @@ import { useNavigate } from 'react-router-dom';
 import PostView from './PostView/PostView';
 import {BarLoader, ScaleLoader, SyncLoader} from "react-spinners";
 import Friends from '../Friends/Friends';
+import Notification from '../Notification/Notification';
+import SockJS from 'sockjs-client';
+import { Stomp } from 'stompjs/lib/stomp';
 
 
 const SideBar = () => {
@@ -196,6 +199,26 @@ const SideBar = () => {
     getUser()
   }
 
+  // ForNotification
+  const [notification, setnotification] = useState(false)
+  const openNotification=()=>{
+    setnotification(true)
+  }
+  const closeNotification=()=>{
+    setnotification(false)
+  }
+
+  // notification Count
+  let notification_count = 0
+
+  if (user) {
+    user?.notifications?.map((notification)=>{
+      if(notification?.seen === false){
+        notification_count++
+      }
+    })
+  }
+
   // UseEffect
   useEffect(() => {
     setloading(true)
@@ -203,6 +226,18 @@ const SideBar = () => {
     if(typeof Cookies.get('user') === 'undefined'){
       navigate('/')
     }
+
+    const socket = new SockJS("http://localhost:8080/ws");
+        
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, () => {
+        console.log("Connected to websocket");
+        stompClient.subscribe("/function/notification", (event) => {
+            getUser();
+        });
+    });
+
   }, [])
   
   return (
@@ -269,8 +304,8 @@ const SideBar = () => {
               </div>
               {/* Notification */}
               <div className='sidebar_icons_'>
-                  <a>
-                    <VscBell className='sidebar_icon'/>
+                  <a onClick={openNotification}>
+                    <VscBell className='sidebar_icon'/>{notification_count !== 0 ? <sup>{notification_count}</sup>: <></>}
                     <span>Notification</span>
                   </a>
               </div>
@@ -410,6 +445,9 @@ const SideBar = () => {
               )
             }
           </div>
+
+          {/* Notification Process */}
+          {notification && <Notification onClose={closeNotification}/>}
       </div>
     </>
   )

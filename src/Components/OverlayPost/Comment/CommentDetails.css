@@ -51,3 +51,23 @@
     display: flex;
     align-items: center;
 }
+
+@media only screen and (max-width: 768px) {
+    .comment_middle_username{
+        font-size: 10px;
+    }
+    .comment_middle_username>p>span{
+        font-size: 10px;
+    }
+    .comment_middle_data{
+        font-size: 10px;
+    }
+    .comment_middle_intraction>p{
+        font-size: 10px;
+    }
+    .comment_middle_viewall>p>span{
+        font-size: 10px;
+    }
+    
+    
+}

@@ -54,6 +54,9 @@
     display: flex;
     justify-content: flex-start;
 }
+.post_media{
+    width: 470px;
+}
 .button_play_mute{
     display: flex;
     justify-content: space-between;
@@ -172,4 +175,59 @@
     border: none;
     color: #0099ff;
     outline: none;
+}
+
+@media only screen and (max-width:768px) {
+    .frontpost_card{
+        width: 300px;
+    }
+    
+    /* Frontpost Card Top */
+    .frontpost_card_top_{
+        width: 300px;
+    }
+    .frontpost_card_top{
+        width: 300;
+    }
+    .frontpost_username{
+        width: 200px;
+    }
+    
+    /* Frontpost Card Middle */
+    .frontpost_card_middle_{
+        width: 300px;
+    }
+    
+    /* Frontpost Card Bottom */
+    .frontpost_card_bottom_{
+        width: 300px;
+    }
+    
+    /* Intraction */
+    .frontpost_card_bottom_intraction{
+        width: 300px;
+    }
+    
+    /* Likes */
+    .frontpost_card_bottom_likes{
+        width: 300px;
+    }
+    
+    /* Description */
+    .frontpost_card_bottom_description{
+        width: 300px;
+    }
+    
+    /* ViewComment */
+    .frontpost_card_bottom_viewcomment{
+        width: 300px;
+    }
+    
+    /* Add Comment */
+    .frontpost_card_bottom_addcomment{
+        width: 300px;
+    }
+    .post_media{
+        width: 300px !important;
+    }
 }

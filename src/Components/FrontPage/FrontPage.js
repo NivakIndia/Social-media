@@ -43,11 +43,12 @@ const FrontPage = () => {
       </div>
 
       <div className='frontpage'>
+
           {/* Side Bar div */}
           <div className='frontpage_sidebar'>
               <SideBar/>
           </div>
-
+          
           {/* Content Page div */}
           <div className='frontpage_content'>
 

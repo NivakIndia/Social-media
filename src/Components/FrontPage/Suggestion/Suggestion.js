@@ -95,7 +95,7 @@ const Suggestion = () => {
           <div>
             {allUsers?.map((alluser,index)=>{
               if (user?.userId !== alluser?.userId) {
-                if (index<=5 && !alluser?.userFollowers.includes(user?.userId)) {
+                if (index<=5 && !user?.userFollowings.includes(alluser?.userId)) {
                   return(
                     <div  className='suggestion_bottom' key={index}>
                       <div className='suggestion_bottom_avatar'>

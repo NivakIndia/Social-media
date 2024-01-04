@@ -84,7 +84,7 @@ const Explore = () => {
                                     <div className='explore_cards'>
                                         <div className='explore_card' onClick={() => handleOverlayPost(post?.postId)}>
                                             {isImage && (
-                                                <>
+                                                <div className='explore_card_'>
                                                     <div className='loading-parts' style={loadingpart ? { display: 'flex', width:'300px',height:'350px'} : { display: 'none' }}>
                                                         <DotLoader
                                                         size={50}
@@ -102,7 +102,7 @@ const Explore = () => {
                                                         placeholderSrc={post?.postURL}
                                                         className='explore_media'
                                                     />
-                                                </>
+                                                </div>
                                             )}
 
                                             {isVideo && (

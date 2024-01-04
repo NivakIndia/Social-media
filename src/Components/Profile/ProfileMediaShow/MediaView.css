@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
 }
-.post_card,.post_card>.post_media{
+.post_card,.post_card>.post_media,.post_card_>span,.post_card_>span>img{
     width: 273.33px;
     height: 273.33px;
     object-fit: fill;
@@ -53,4 +53,22 @@
     position: absolute;
     top: 5px;
     right: 5px;
+}
+
+@media  only screen and (max-width: 768px) {
+    
+    .post_column{
+        margin: 2px;
+    }
+    .post_card,.post_card>.post_media,.post_card>.post_card_>span,.post_card>.post_card_>span>img{
+        width: 112px !important;
+        height: 112px !important;
+    }
+    .reel_column{
+        margin: 2px;
+    }
+    .reel_card,.reel_card>.post_media{
+        width: 112px;
+        height: 160px;
+    }
 }

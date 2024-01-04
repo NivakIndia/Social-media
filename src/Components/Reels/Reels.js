@@ -222,7 +222,7 @@ const ReelsPost = ({postid,handleOverlayPost}) =>{
                   />
               </div>
               <LazyLoadComponent>
-                  <div style={{borderRadius:'8px', overflow:'hidden',position:'relative'}}>
+                  <div style={{borderRadius:'8px', overflow:'hidden',position:'relative'}} className='reels_container_left_'>
                       <ReactPlayer
                           url={post?.postURL}
                           playing={play && inView }
@@ -235,13 +235,14 @@ const ReelsPost = ({postid,handleOverlayPost}) =>{
                               handleLoad()
                           }}
                           pip={false}
+                          className="reels_container_left__"
                       />
                       <p className='play_button' onClick={()=>setplay(pre=> !pre)}>{play && inView ?<FaPause/>:<FaPlay/>}</p>
                       <div className='reels_intraction_div'>                         
                           <div className='reels_card_container'>
                             <div className='reels_card_top'>
                                 <a href={`/account/profile/${postuser?.userName}/`}>
-                                    <Avatar style={{width:'32px',height:'32px'}}>
+                                    <Avatar style={{width:'32px',height:'32px'}} className='top_avatar'>
                                         <LazyLoadImage
                                             key={post?.userId}
                                             width={32}

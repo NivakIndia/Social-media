@@ -102,7 +102,7 @@ const Profile = () => {
                         <Avatar className='profile_top_avatar_class'>
                         
                             <LazyLoadImage key={user?.userId} src={user?.profileURL ? user?.profileURL : '/profile.png'} width={150} height={150} effect="blur"
-                                placeholderSrc={user?.profileURL ? user?.profileURL : '/profile.png'} className='profile_image'/>
+                                placeholderSrc={user?.profileURL ? user?.profileURL : '/profile.png'}/>
                           
                         </Avatar>
                         

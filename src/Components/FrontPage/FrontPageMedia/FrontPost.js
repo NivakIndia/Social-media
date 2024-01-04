@@ -272,17 +272,18 @@ const FrontPost = ({post}) => {
                                     <source src={post?.postURL} type='video/mp4' />
                                     Your browser does not support the video tag.
                                 </video>*/}
-                                <div>
+                                <div className='post_media'>
                                     <ReactPlayer
                                         url={post?.postURL}
                                         playing={play && inView }
                                         loop
                                         muted={mute}
-                                        width={'470px'}
+                                        width={'100%'}
                                         height={'586.33px'}
                                         onReady={() => {
                                             handleLoad()
                                         }}
+                                        className='post_media'
                                     />
                                 </div>
                             </LazyLoadComponent>

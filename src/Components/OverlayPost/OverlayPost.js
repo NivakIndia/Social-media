@@ -244,7 +244,7 @@ const OverlayPost = ({onClose,postid}) => {
             {/* Overlay Post Left */}
             <div className='overlaypost_left'>
                 {isImage && (
-                    <>
+                    <div className='overlaypost_left_'>
                         <div className='loading-parts' style={loadingpart ? { display: 'flex', width:'auto',height:'100%'} : { display: 'none' }}>
                             <DotLoader
                             size={50}
@@ -260,7 +260,7 @@ const OverlayPost = ({onClose,postid}) => {
                             placeholderSrc={post?.postURL}
                             className='overlaypost_image'
                         />
-                    </>
+                    </div>
                 )}
 
                 {isVideo && (
