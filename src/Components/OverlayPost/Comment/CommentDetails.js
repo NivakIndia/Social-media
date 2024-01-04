@@ -4,8 +4,6 @@ import api from "../../../api/axiosConfig";
 import { Avatar } from '@mui/material';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import SockJS from 'sockjs-client'
-import { Stomp } from 'stompjs/lib/stomp'
 
 const CommentDetails = ({comment,user,postid,getpost,commentreplyfunction}) => {
     const [commentuser, setcommentuser] = useState()

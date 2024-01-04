@@ -23,12 +23,11 @@ const Notification = ({onClose}) => {
 
     useEffect(()=>{
         getCurrentUser()
-        const socket = new SockJS("http://localhost:8080/ws");
+        const socket = new SockJS(`${api.defaults.baseURL}/ws`);
         
         const stompClient = Stomp.over(socket);
     
         stompClient.connect({}, () => {
-            console.log("Connected to websocket");
             stompClient.subscribe("/function/notification", (event) => {
                 getCurrentUser();
             });

@@ -199,30 +199,24 @@ const OverlayPost = ({onClose,postid}) => {
         getPost()
         getUserData()
 
-        const socket = new SockJS("http://localhost:8080/ws");
+        const socket = new SockJS(`${api.defaults.baseURL}/ws`);
         
         const stompClient = Stomp.over(socket);
     
         stompClient.connect({}, () => {
-            console.log("Connected to websocket");
             stompClient.subscribe("/function/intraction", (event) => {
-                console.log("Post Liked event received: ", event);
                 getPost();
             });
             stompClient.subscribe("/function/postcomment", (event) => {
-                console.log("Post Comment event received: ", event);
                 getPost()
             });
             stompClient.subscribe("/function/commentintraction", (event) => {
-                console.log("Post Comment event received: ", event);
                 getPost()
             });
             stompClient.subscribe("/function/postreplycomment", (event) => {
-                console.log("Post Comment event received: ", event);
                 getPost()
             });
             stompClient.subscribe("/function/replycommentintraction", (event) => {
-                console.log("Post Comment event received: ", event);
                 getPost()
             });
         });

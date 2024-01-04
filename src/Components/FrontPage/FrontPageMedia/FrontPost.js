@@ -184,18 +184,15 @@ const FrontPost = ({post}) => {
         getUser();
         getPost();
     
-        const socket = new SockJS("http://localhost:8080/ws");
+        const socket = new SockJS(`${api.defaults.baseURL}/ws`);
         
         const stompClient = Stomp.over(socket);
     
         stompClient.connect({}, () => {
-            console.log("Connected to websocket");
             stompClient.subscribe("/function/intraction", (event) => {
-                console.log("Post Liked event received: ", event);
                 getPost();
             });
             stompClient.subscribe("/function/postcomment", (event) => {
-                console.log("Post Comment event received: ", event);
                 getPost();
             });
         });
