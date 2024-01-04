@@ -192,3 +192,59 @@
     color: #ffffff;
     border-radius: 5px;
 }
+
+@media only screen and (max-width:768px) {
+    .profileedit{
+        position: relative;
+        flex-direction: column;
+    }
+    
+    /* Spliting the Profile Edit for sidebar */
+    .profileedit_sidebar{
+        position: fixed; /* Change to fixed positioning */
+        bottom: 0;
+        width: 100%;
+        height: auto;
+        background-color: black; /* Set the background color */
+        z-index: 9999;
+        box-shadow: 0px -0.3px 0px 0px #747474;
+    }
+
+    .profileedit_setting>h1{
+        font-size: 15px;
+    }
+
+    .profileedit_setting_container>p{
+        font-size: 10px;
+    }
+    
+    /* Profile Edit Content Top */
+    .profileedit_content_top>.heading{
+        font-size: 20px;
+    }
+    .profileedit_content_top_layer>.avatar{
+        width: 25%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .profileedit_content_top_layer>.avatar>.css-2s90m6-MuiAvatar-root,.profileedit_content_top_layer>.avatar>.css-2s90m6-MuiAvatar-root>img{
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .profileedit_content_top_layer>.content>p{
+        font-size: 15px;
+    }
+    .profileedit_content_top_layer>.content>span{
+        font-size: 10px;
+    }
+    
+    .profileedit_content_top_layer>button{
+        width: 40%;
+        height: 35px;
+        font-size: 10px;
+    }
+    
+}
