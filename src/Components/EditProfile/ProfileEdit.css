@@ -229,7 +229,8 @@
         align-items: center;
         justify-content: center;
     }
-    .profileedit_content_top_layer>.avatar>.css-2s90m6-MuiAvatar-root,.profileedit_content_top_layer>.avatar>.css-2s90m6-MuiAvatar-root>img{
+
+    .profileedit_content_top_layer>.avatar>.MuiAvatar-root,.profileedit_content_top_layer>.avatar>.MuiAvatar-root>img{
         width: 40px !important;
         height: 40px !important;
     }
