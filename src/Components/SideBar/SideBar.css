@@ -299,7 +299,7 @@
 @media only screen and (max-width: 768px){
     .sidebar{
         display: flex;
-        height: 50px;
+        height: auto;
         flex-direction: none;
     }
     
