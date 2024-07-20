@@ -89,13 +89,13 @@ const Login = () => {
     }
 
     useEffect(()=>{
-        setloading(true)
         Cookies.remove('user')
         getAllUsers()
     },[])
   return (
     <>
         <div className='loading' style={loading?{display:'flex'}:{display:'none'}}>
+            <p style={{color: "#ffff00"}}>*May it take some time initially to restart server wait patiently</p>
           <SyncLoader
               color={'#36d7b7'}
               loading={loading}
