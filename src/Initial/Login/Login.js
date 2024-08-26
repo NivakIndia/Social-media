@@ -50,7 +50,11 @@ const Login = () => {
             setloading(true)
             const loginToCheck = userData.login
             const passwordToCheck = userData.password
-
+            console.log(loginToCheck);
+            console.log(passwordToCheck);
+            console.log(allUsers);
+            
+            
             const usernameExists = allUsers?.some((user)=> user?.userName === loginToCheck)
             const useridExists = allUsers?.some((user)=>user?.userId === loginToCheck)
 
