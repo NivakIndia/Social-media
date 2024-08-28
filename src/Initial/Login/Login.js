@@ -32,6 +32,7 @@ const Login = () => {
     // GetUser
     const getAllUsers = async () => {
         try {
+            setloading(true)
             const response = await api.get('/nivak/media/allusers/')
             setallUsers(response.data)
             setloadingapi(false)
