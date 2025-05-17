@@ -13,9 +13,9 @@
     padding: 15px;
     height: 450px;
     width: 300px;
-    box-shadow: 0px 0px 18px 0px #747474;
+    border-radius: .8rem;
+    box-shadow: 0px 0px 18px 0px var(--alter-color);
 }
-
 
 .login-form form{
     margin-top: 15px;
@@ -32,24 +32,25 @@
 
 .login-datas form input{
     margin-bottom: 10px;
-    color: #747474;
+    color: var(--alter-color);
     text-indent: 10px;
     width: 250px;
     height: 30px;
-    box-shadow: 0px 0px 1px 0px #747474;
+    box-shadow: 0px 0px 10px 0px var(--alter-color);
     transition: transform 300ms ease-in-out;
     border: none;
     outline: none;
     background: transparent;
+    border-radius: .4rem;
 }
 
 .login-datas form input:focus{
-    box-shadow: 0px 0px 8px 0px #747474;
+    box-shadow: 0px 0px 8px 0px var(--alter-color);
     transform: scale(1.05);
 }
 
 .login-datas form input::placeholder{
-    color: #747474;
+    color: var(--alter-color);
     font-size: 11px;
     text-indent: 10px;
 }
@@ -59,20 +60,22 @@
     margin-bottom: 30px;
     width: 250px;
     height: 30px;
-    border-radius: 10px;
+    border-radius: .4rem;
     color: white;
     border: none;
-    background: #0099ff;
+    background: var(--button-color);
 }
 
 .login-container .page-change a{
-    color: #0099ff;
+    color: var(--button-color);
     cursor: pointer;
     text-decoration: none;
 }
 
 .login-form a{
-    color: #0099ff;
+    margin-top: -20px;
+    margin-bottom: 10px;
+    color: var(--button-color);
     cursor: pointer;
     text-decoration: none;
 }
@@ -80,13 +83,77 @@
 .login-form p{
     width: 260px;
     font-size: 12px;
-    color: #747474;
+    color: var(--alter-color);
     text-align: center;
     margin-bottom: 15px;
 }
 
-.msgError{
-    text-align: center;
-    color: red;
+/*----------> BREAKPOINST <----------*/
+
+/* Large devices */
+@media screen and (max-width: 992px){
+    
+}
+
+/* Medium devices */
+@media screen and (max-width: 768px){
+    .login-datas{
+        padding: 10px;
+        height: 400px;
+        width: 270px;
+    }
+    
+    .login-form form{
+        margin-top: 1px;
+        width: 250px;
+        height: 330px;
+    }
+    
+    .login-form .logo{
+        margin-bottom: 20px;
+    }
+    
+    .login-datas form input{
+        width: 230px;
+    }
+    
+    .login-datas form button{
+        width: 230px;
+    }
+    
+    .login-container .page-change{
+        font-size: 13px;
+    }
+    
+    .login-form a{
+        font-size: 13px;
+    }
+    
+}
+
+@media screen and (max-width: 576px){
+  
+}
+
+/* Small devices */
+@media screen and (max-width: 350px){
+    .login-datas{
+        padding: 10px;
+        height: 350px;
+        width: 250px;
+    }
+    
+    .login-form form{
+        margin-top: 1px;
+        height: 300px;
+    }
+
+    .login-container .page-change{
+        margin-top: -15px;
+    }
+    
+    .login-form a{
+        margin-top: -25px;
+    }
 }
   

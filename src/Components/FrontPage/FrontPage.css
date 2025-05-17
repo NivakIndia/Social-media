@@ -5,8 +5,7 @@
 
 /* Spliting the Forntpage */
 .frontpage_sidebar{
-    flex: 0.2;
-    box-shadow: 0.3px 0px 0px 0px #747474;
+    flex: 0.16;
 }
 .frontpage_content{
     flex: 0.8;

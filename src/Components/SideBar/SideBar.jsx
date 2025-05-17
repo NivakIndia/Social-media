@@ -15,30 +15,61 @@ import Friends from '../Friends/Friends';
 import Notification from '../Notification/Notification';
 import SockJS from 'sockjs-client';
 import { Stomp } from 'stompjs/lib/stomp';
+import { useLoader } from '../../Others/LoaderContext';
+import Functions from '../../Functions';
 
 
 const SideBar = () => {
+  const { startLoader, stopLoader } = useLoader()
   const [user, setuser] = useState()
   const navigate = useNavigate()
-  const [loading, setloading] = useState(false)
-  const [loadingpart, setloadingpart] = useState(false)
-  const [loadingapi,setloadingapi] = useState(false)
+  const pathname = window.location.pathname; // Only path
+  const isActive = {
+    isHome : false,
+    isSearch : false,
+    isExplore : false,
+    isReels : false,
+    isMessage : false,
+    isNotification : false,
+    isPost : false,
+    isProfile : false,
+  }
+
+  if(pathname === '/account/'){
+    isActive.isHome = true;
+  }
+  else {
+    isActive.isExplore = pathname.includes('/explore/');
+    isActive.isReels = pathname.includes('/reels/');
+    isActive.isMessage = pathname.includes('/message/');
+    isActive.isProfile = pathname.includes('/profile/');
+  }
 
   // Get Login User data
   const getUser=async()=>{
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      timeout: 5000,
+    };
+
     try {
-      const response = await api.get(`/nivak/media/byuserid/${Cookies.get('user')}/`)
-      setuser(response.data)
-      setloadingapi(false)
-      setloading(false)
+      const response = await api.post("/nivak/user/getuserdata/", null, {
+            params: {
+                id: Cookies.get("_id")
+            },
+            ...config
+        })
+      setuser(response.data.data)
     } catch (error) {
-      setloading(false)
-      setloadingapi(true)
     }
   }
 
   // To Open and Close NewPost overlay
   const toOpenNewPost = () => {
+    
     setisOpenNewPost(true)
   }
   const toCloseNewPost = () => {
@@ -142,21 +173,31 @@ const SideBar = () => {
   }
 
   const sharePost= async ()=>{
-    setloadingpart(true)
+    
+    startLoader("Uploading Post...")
     const formData = new FormData();
-    formData.append('userid',user?.userId)
+    formData.append('id',Cookies.get("_id"))
     formData.append('post',post)
     formData.append('description', description)
 
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json'
+      },
+      timeout: 50000,
+    };
+
     try {
-      await api.post('/nivak/media/newpost/',formData,{
-        headers:{
-          'Content-Type':'multipart/form-data'
-        }
-      })
-      setloading(false)
+      const response = await api.post('/nivak/post/newpost/',formData,config)
+      console.log(response);
+      
+      stopLoader(response.data.status, response.data.message, response.data.message)
       toCloseButton()
     } catch (error) {
+      console.log(error);
+      
+      stopLoader(false)
     }
   }
   
@@ -178,7 +219,7 @@ const SideBar = () => {
   const toCloseButton = () =>{
     toCloseNewPost()
     setpost(null)
-    setpostPreview(null) 
+    setpostPreview(null)
     setisPost(false)
     setnext(false)
     setdescription('')
@@ -221,19 +262,21 @@ const SideBar = () => {
 
   // UseEffect
   useEffect(() => {
-    setloading(true)
     getUser()
     if(typeof Cookies.get('user') === 'undefined'){
-      navigate('/')
+      //navigate('/')
     }
 
     const socket = new SockJS(`${api.defaults.baseURL}/ws`);
         
     const stompClient = Stomp.over(socket);
+    stompClient.debug = null
 
     stompClient.connect({}, () => {
         stompClient.subscribe("/function/notification", (event) => {
-            getUser();
+          if (event.headers.destination === "/function/notification") {
+              getUser()
+          }
         });
     });
 
@@ -242,23 +285,8 @@ const SideBar = () => {
   return (
     <>
       {friendstatus && (
-          <Friends status={frndstatus} profileuser={user} onClose={handleCloseStatus} />
+          <Friends status={frndstatus} onClose={handleCloseStatus} />
       )}
-      <div className='loading' style={loading?{display:'flex'}:{display:'none'}}>
-        <SyncLoader
-            color={'#36d7b7'}
-            loading={loading}
-        />
-      </div>
-      <div className='loading' style={loadingapi?{display:'flex'}:{display:'none'}}>
-        <p style={{color:'#ff0000aa'}}>Server Error please try later</p>
-        <br/>
-        <BarLoader
-            width={300}
-            color={'#ff0000aa'}
-            loading={loadingapi}
-        />
-      </div>
       <div className='sidebar'>
           {/* Side bar Logo */}
           <div className='sidebar_logo'>
@@ -268,56 +296,56 @@ const SideBar = () => {
           <div className='sidebar_content'>
               {/* Home */}
               <div className='sidebar_icons_'>
-                  <a href='/account/'>
+                  <a href='/account/' className={isActive.isHome ? 'icon_active' : ''}>
                     <VscHome className='sidebar_icon'/>
                     <span>Home</span>
                   </a>
               </div>
               {/* Search */}
               <div className='sidebar_icons_'>
-                  <a onClick={()=>handlestatus('search')}>
+                  <a onClick={()=>handlestatus('search')} className={isActive.isSearch ? 'icon_active' : ''}>
                     <VscSearch className='sidebar_icon'/>
                     <span>Search</span>
                   </a>
               </div>
               {/* Explore */}
               <div className='sidebar_icons_'>
-                  <a href='/account/explore/'>
+                  <a href='/account/explore/' className={isActive.isExplore ? 'icon_active' : ''}>
                     <VscCompass className='sidebar_icon'/>
                     <span>Explore</span>
                   </a>
               </div>
               {/* Reels */}
               <div className='sidebar_icons_'>
-                  <a href='/account/reels/'>
+                  <a href='/account/reels/' className={isActive.isReels ? 'icon_active' : ''}>
                     <VscPlayCircle className='sidebar_icon'/>
                     <span>Reels</span>
                   </a>
               </div>
               {/* Message */}
               <div className='sidebar_icons_'>
-                  <a>
+                  <a className={isActive.isMessage ? 'icon_active' : ''}>
                     <VscSend className='sidebar_icon'/>
                     <span>Message</span>
                   </a>
               </div>
               {/* Notification */}
               <div className='sidebar_icons_'>
-                  <a onClick={openNotification}>
+                  <a onClick={openNotification} className={isActive.isNotification ? 'icon_active' : ''}>
                     <VscBell className='sidebar_icon'/>{notification_count !== 0 ? <sup>{notification_count}</sup>: <></>}
                     <span>Notification</span>
                   </a>
               </div>
               {/* Post */}
               <div className='sidebar_icons_'>
-                  <a onClick={toOpenNewPost}>
+                  <a onClick={toOpenNewPost} className={isActive.isPost ? 'icon_active' : ''}>
                     <FiPlusCircle className='sidebar_icon'/>
                     <span>Post</span>
                   </a>
               </div>
               {/* Profile */}
               <div className='sidebar_icons_'>
-                  <a href={`/account/profile/${user?.userName}/`}>
+                  <a href={`/account/profile/${Cookies.get("_id")}/`} className={isActive.isProfile ? 'icon_active' : ''}>
                     <Avatar className='sidebar_icon' style={{width:"27px",height:"27px"}}>
                     {
                       user?.profileURL ? (
@@ -409,13 +437,6 @@ const SideBar = () => {
                 <>
                   {/* New Post Share */}
                   <div className='newpost_share newpost_background'>
-                    <div className='loading-parts' style={loadingpart?{display:'flex', width:'824px',height:'468px'}:{display:'none'}}>
-                      <ScaleLoader
-                          size={10}
-                          color={'#36d7b7'}
-                          loading={loadingpart}
-                      />
-                    </div>
                     {/* New Post Share Top*/}
                     <div className='newpost_share_top'>
                       <h2 onClick={toBackButton}><VscArrowLeft/></h2>

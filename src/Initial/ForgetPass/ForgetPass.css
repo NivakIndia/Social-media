@@ -1,32 +1,37 @@
 .forget-content-container{
-    max-width: 350px;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin-left: 36%;
     position: relative;
-    margin-top: 100px;
+    width: 100vw;
+    height: 100vh;
 }
+
 .forget-container{
-    box-shadow: 0px 0px 18px 0px #747474;
-    border-radius: 2px;
+    box-shadow: 0px 0px 18px 0px var(--alter-color);
+    border-radius: .8rem;
+    width: 350px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
 }
+
 .forget-container .lock-icon{
     margin-top: 25px;
     margin-bottom: 15px;
     font-size: 60px;
 }
+
 .forget-container .heading{
     font-size: medium;
     font-weight: 900;
-    color: #747474;
+    color: var(--alter-color);
 }
 .forget-container p{
     width: 260px;
     font-size: 12px;
-    color: #747474;
+    color: var(--alter-color);
     text-align: center;
     margin-bottom: 15px;
 }
@@ -34,6 +39,7 @@
     background: #60606060;
     width: 100%;
     height: 40px;
+    border-radius: 0 0 .8rem .8rem;
 }
 .backlogin-container a,.backlogin-container button{
     text-decoration: none;
@@ -49,29 +55,29 @@
     border-radius: 2px;
 }
 .backlogin-container:hover{
-    box-shadow: 0px 0px 8px 0px #747474;
+    box-shadow: 0px 0px 8px 0px var(--alter-color);
 }
 
 .forget-container form input{
     background: transparent;
     min-width: 260px;
     margin-bottom: 7px;
-    color: #747474;
+    color: var(--alter-color);
     height: 34px;
     outline: none;
-    box-shadow: 0px 0px 1px 0px #747474;
+    box-shadow: 0px 0px 1px 0px var(--alter-color);
     transition: transform 300ms ease-in-out;
     border-radius: 2px;
     border: none;
     text-indent: 10px;
 }
 .forget-container form input:focus{
-    box-shadow: 0px 0px 8px 0px #747474;
+    box-shadow: 0px 0px 8px 0px var(--alter-color);
     transform: scale(1.05);
 }
 
 .forget-container form input::placeholder{
-    color: #747474;
+    color: var(--alter-color);
     font-size: 11px;
     text-indent: 10px;
 }
@@ -79,11 +85,11 @@
     margin-top: 10px;
     min-width: 265px;
     height: 30px;
-    background-color: #0099ff;
+    background-color: var(--button-color);
     outline: none;
     border: none;
     color: white;
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 7px;
 }
 .forget-container .horizontal-line{
@@ -95,7 +101,7 @@
     background-color: #60606060;
 }
 .forget-container .or{
-    color: #747474;
+    color: var(--alter-color);
     font-size: 13px;
     z-index: 2;
     font-weight: bold;
@@ -106,13 +112,61 @@
     margin-bottom: 15px;
 }
 .forget-container .create-account button{
-    color: #0099ff;
+    color: var(--button-color);
     background-color: transparent;
     border: none;
     outline: none;
     margin-bottom: 25px;
 }
-.msgError{
-    text-align: center;
-    color: red;
+
+
+/*----------> BREAKPOINST <----------*/
+
+/* Large devices */
+@media screen and (max-width: 992px){
+    
+}
+
+/* Medium devices */
+@media screen and (max-width: 768px){
+    
+}
+
+@media screen and (max-width: 576px){
+  
+}
+
+/* Small devices */
+@media screen and (max-width: 350px){
+    .forget-container{
+        border-radius: .4rem;
+        width: 280px;
+    }
+    
+    .forget-container .lock-icon{
+        font-size: 50px;
+    }
+
+    .forget-container p{
+        width: 240px;
+    }
+
+    .backlogin-container{
+        border-radius: 0 0 .4rem .4rem;
+    }
+
+    .forget-container form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .forget-container form input{
+        min-width: 230px;
+    }
+    
+    .forget-container form button{
+        min-width: 230px;
+    }
 }

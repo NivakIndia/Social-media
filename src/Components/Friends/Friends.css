@@ -7,10 +7,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.795); /* Semi-transparent black background */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
     z-index: 9999;
+    backdrop-filter: blur(5px);
 }
 .friend_>button{
+    width: 30px;
+    height: 30px;
     position: fixed;
     top: 15px;
     right: 15px;
@@ -18,9 +21,12 @@
     align-items: center;
     justify-content: center;
     border: none;
+    border-radius: 5px;
     background: transparent;
     color: red;
+    font-weight: 800;
     font-size: 20px;
+    background: var(--color);
 }
 .friend{
     display: flex;
@@ -29,16 +35,23 @@
     width: 27vw;
     border-radius: 10px;
     height: 65vh;
-    background: #000000;
-    box-shadow: 0px 0px 2px 0px #747474;
+    background: var(--background-color);
+    box-shadow: 0px 0px 2px 0px var(--alter-color);
     flex-direction: column;
+}
+
+/* Friend Title */
+.friend_title{
+    position: relative;
+    width: 100%;
+    height: 60px;
 }
 
 /* Friend Top */
 .friend_top{
     width: 100%;
-    height: 6vh;
-    box-shadow: 0px 0.3px 0px 0px #747474;
+    height: 50%;
+    box-shadow: 0px 0.3px 0px 0px var(--alter-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,36 +60,33 @@
 /* Friend Middle */
 .friend_middle{
     width: 100%;
-    height: 6vh;
+    height: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .friend_middle>input{
     width: 80%;
-    height: 4vh;
     border: none;
     outline: none;
-    color: #747474;
+    color: var(--alter-color);
     background-color: transparent;
 }
 
 /* Friend Bottom */
 .friend_bottom_{
     width: 100%;
-    height: 100%;
+    height: 85%;
+    overflow-y: scroll;
     display: flex;
-    align-items: flex-start;
 }
 .friend_bottom{
     width: 100%;
-    height: 96%;
     overflow: scroll;
     display: flex;
     align-items: center;
     flex-direction: column;
     scroll-behavior: smooth;
-    margin: 5px;
 }
 
 .eachfriend{
@@ -111,7 +121,7 @@
 }
 .eachfriend_content>span{
     font-size: 12px;
-    color: #747474;
+    color: var(--alter-color);
 }
 
 .eachfriend_button{
@@ -126,12 +136,8 @@
     align-items: center;
     justify-content: center;
     font-size: 12px;
-    color: #0099ff;
+    color: var(--button-color);
 }
 
 @media only screen and (max-width: 768px) {
-    .friend{
-        width: 80vw;
-        height: 50vh;
-    }
 }

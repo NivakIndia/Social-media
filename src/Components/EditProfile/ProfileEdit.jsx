@@ -6,42 +6,29 @@ import { RxAvatar } from 'react-icons/rx'
 import { Avatar } from '@mui/material'
 import { DotLoader, SyncLoader } from 'react-spinners'
 import Cookies from 'js-cookie'
+import ApiFunctions from '../../ApiFunctions'
+import ImageLoading from '../../Others/ImageLoading'
 
 const ProfileEdit = () => {
+  const {toGetUserData, toChangeProfileImage, toUpdateBiometric} = ApiFunctions()
   const [loading, setloading] = useState(false)
-  const [loadingpart, setloadingpart] = useState(false);
 
   const [user, setuser] = useState()
 
   //Get User
   const getUser= async()=>{
-    try {
-      const isUser = await api.get(`/nivak/media/byuserid/${Cookies.get('user')}/`)
-      setuser(isUser.data)
-      setuserBio(isUser.data?.userBio ? `${isUser.data?.userBio} `:'')
-      setloading(false)
-    } catch (error) {
-      setloading(false)
-    }
+    const response = (await toGetUserData({id:Cookies.get('_id')})).data.data
+    setuser(response)
+    setuserBio(response?.userBio ? `${response?.userBio} `:'')
+    setloading(false)
   }
 
   //Profile Photo change
   const profileChange = async (event) => {
-    setloadingpart(true)
+    setloading(true)
     event.preventDefault()
-    const formData = new FormData()
-    formData.append('userid', user?.userId)
-    formData.append('image',event.target.files[0])
-    try {
-      await api.post('/nivak/media/profilepic/', formData,{
-        headers:{
-          'Content-Type':'mutltipart/form-data'
-        }
-      })
-      getUser()
-      setloadingpart(false)
-    } catch (error) {
-    }
+    await toChangeProfileImage({id: user.id, image: event.target.files[0]})
+    getUser()
   }
   const buttonChange = () =>{
     const fileInput = document.getElementById('fileInput')
@@ -54,13 +41,14 @@ const ProfileEdit = () => {
   const [userBio, setuserBio] = useState('')
   const initbio = userBio
   const [bio, setbio] = useState()
+
   const bioEnterAction = (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       const { selectionStart, selectionEnd } = event.target;
       const newText =
         bio.substring(0, selectionStart) +
-        ';\n' +
+        '\n' +
         bio.substring(selectionEnd);
 
       setbio(newText);
@@ -71,8 +59,8 @@ const ProfileEdit = () => {
     }
   };
   const onBioChange = (event) => {
-    const typedText = bio === undefined ? initbio : event.target.value
-    setbio(typedText)
+    // const typedText = bio === undefined ? initbio : event.target.value
+    setbio(event.target.value) // typedText
   };
   
   // Gender change
@@ -83,41 +71,18 @@ const ProfileEdit = () => {
   };
 
   const sendBiometric = async () => {
-    setloading(true)
-    const formData = new FormData()
-    formData.append('userid',user?.userId)
-    formData.append('bio', bio)
-    formData.append('gender', gender)
-    try {
-      await api.post('/nivak/media/biometric/', formData,{
-        headers:{
-          'Content-Type':'form-data'
-        }
-      })
-      getUser()
-      setloading(false)
-    } catch (error) {
-    }
+    await toUpdateBiometric({id: user?.id, bio: bio, gender: gender})
+    getUser();
   }
   
-
-  
-
   
   useEffect(() => {
-    setloading(true)
     getUser()
   }, [])
   
 
   return (
     <div className='profileedit'>
-      <div className='loading' style={loading?{display:'flex'}:{display:'none'}}>
-            <SyncLoader
-            color={'#36d7b7'}
-            loading={loading}
-            />
-      </div>
       
       <div className='profileedit_sidebar'>
         <SideBar/>
@@ -143,16 +108,12 @@ const ProfileEdit = () => {
 
                <div className='profileedit_content_top_layer'>
                   <div className='avatar'>
-                    <div className='loading-parts' style={loadingpart ? { display: 'flex', width:'70px',height:'70px', borderRadius:'50%'} : { display: 'none' }}>
-                      <DotLoader
-                        size={30}
-                        color={'#ffffff'}
-                        loading={loadingpart}
-                      />
+                    <div className='profileImage'>
+                        {loading ? <ImageLoading isBackground={true} isCircle={true}/> : 
+                          user?.profileURL ? <img src={user?.profileURL} className='profileImage'/>:<img src='/profile.png' className='profileImage'/>
+                        }
+                        
                     </div>
-                    <Avatar style={{width:"70px",height:"70px"}}>
-                        {user?.profileURL ? <img src={user?.profileURL} style={{width:"70px",height:"70px"}}/>:<img src='/profile.png' style={{width:"70px",height:"70px"}}/>}
-                    </Avatar>
                   </div>
                   <div className='content'>
                     <p>{user?.userName}</p>

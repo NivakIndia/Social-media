@@ -7,30 +7,36 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.795); /* Semi-transparent black background */
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
     z-index: 999;
 }
 .notification_>button{
+    width: 30px;
+    height: 30px;
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
+    border-radius: 5px;
     background: transparent;
     color: red;
+    font-weight: 800;
     font-size: 20px;
+    background: var(--color);
 }
 .notification{
-    box-shadow: 0px 0px 18px 8px #60606060;
+    box-shadow: 0px 0px 18px 8px var(--alter-color);
     width: 30%;
     border-radius: 10px;
     height: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #000000;
+    background-color: var(--background-color);
 }
 .notification_container{
     width: 95%;
@@ -39,8 +45,10 @@
 }
 .notification_top{
     width: 100%;
-    color: #ffffff;
-    min-height: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .nomessage{
     width: 100%;
@@ -48,17 +56,23 @@
     display: flex;
     font-size: 12px;
     align-items: center;
-    color: #747474;
+    color: var(--alter-color);
     justify-content: center;
 }
-.notification_bottom>p{
-    margin-top: 10px;
-    color: #ffffff;
-}
+
 .notification_bottom{
     width: 100%;
-    color: #747474;
-    height: auto;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.unseen{
+    position: absolute;
+    left: 0px;
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
 }
 
 .notification_data{
@@ -66,11 +80,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    box-shadow: 0px 0.1px 0px 0px #747474;
+    box-shadow: 0px 0.1px 0px 0px var(--alter-color);
 }
 
 /* Notification Data Left */
 .notification_data_left{
+    position: relative;
     width: 20%;
     height: 50px;
     display: flex;
