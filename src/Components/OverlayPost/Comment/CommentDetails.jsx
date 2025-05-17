@@ -1,73 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import './CommentDetails.css'
-import api from "../../../api/axiosConfig";
 import { Avatar } from '@mui/material';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import Functions from '../../../Functions';
+import ApiFunctions from '../../../ApiFunctions';
+import MentionTextArea from '../../../Others/MentionTextArea';
 
 const CommentDetails = ({comment,user,postid,getpost,commentreplyfunction}) => {
+
+    const { forCommentInstraction, toGetUserData } = ApiFunctions()
+    const { toGetTimeDifference } = Functions()
     const [commentuser, setcommentuser] = useState()
 
-    // get Time from present
+    /* get Time from present */
     const getTimeDifference = (targetDate, targetTime) => {
-        const currentDate = new Date();
-        const providedDate = new Date(`${targetDate}T${targetTime}`);
-        const timeDifference = currentDate - providedDate;
-    
-        const seconds = Math.floor(timeDifference / 1000);
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-        const months = Math.floor(days / 30);
-        const years = Math.floor(days / 365);
-    
-        if (seconds < 60) {
-            return `${seconds}s`;
-        } else if (minutes < 60) {
-            return `${minutes}min`
-        } else if (hours < 24) {
-            return `${hours}h`
-        } else if (days < 30) {
-            return `${days}d`
-        } else if (months < 12) {
-            return `${months}m`
-        } else {
-            return `${years}y`
-        }
+        return toGetTimeDifference({targetDate: targetDate, targetTime: targetTime, fullFormat: false})
     };
 
-    const commentWithMension = (message) => {
-        const regex = /@(\w+)/g;
-        return message.replace(regex, (match, username) => {
-            // Replace @username with a link to the user's profile or specific action
-            return `<a href="/account/profile/${username}/" style='color:#008cff'>@${username}</a>`;
-        });
-    };
 
-    // For Comment Intraction
+    /* For Comment Intraction */
     const commentIntraction = async () =>{
-        const formData = new FormData()
-        try {
-            formData.append('postid',postid)
-            formData.append('userid',user?.userId)
-            formData.append('commentid',comment?.commentId)
-            const response = await api.post('/nivak/media/commentintraction/',formData,{
-                headers: {
-                    'Content-Type' : 'form-data',
-                }
-            })
-            getpost()
-        } catch (error) {
-        }
+        await forCommentInstraction({postId: postid, userId: user.id, commentId: comment.commentId})
+        getpost(postid)
     }
 
     // Get Comment User
     const getCommentUser = async() => {
-        try {
-            const response = await api.get(`/nivak/media/byuserid/${comment?.commenterUserId}/`)
-            setcommentuser(response.data)
-        } catch (error) {
-        }
+        setcommentuser((await toGetUserData({id: comment.commenterUserId})).data.data)
     }
 
     // Comment Reply
@@ -102,7 +62,7 @@ const CommentDetails = ({comment,user,postid,getpost,commentreplyfunction}) => {
                     <p>{commentuser?.userName} <span>{getTimeDifference(comment?.commentDate,comment?.commentTime)}</span></p>
                 </div>
                 <div className='comment_middle_data'>
-                    <p dangerouslySetInnerHTML={{ __html: commentWithMension(comment?.commentMessage) }}></p>
+                    <MentionTextArea className="" message={comment?.commentMessage} setMessage={null} placeholder='Add a comment...' isEditable={false}/>
                 </div>
                 <div className='comment_middle_intraction'>
                     {comment?.commentLikes && <p>{comment?.commentLikes.length} likes</p>}
@@ -130,7 +90,7 @@ const CommentDetails = ({comment,user,postid,getpost,commentreplyfunction}) => {
 
             {/* Comment Right */}
             <div className='comment_right'>
-                {!viewall && <p onClick={commentIntraction}>{comment?.commentLikes.includes(user?.userId)  ?<FaHeart style={{color:'red'}}/>:<FaRegHeart/>}</p>}
+                {!viewall && <p onClick={commentIntraction}>{comment?.commentLikes.includes(user?.id)  ?<FaHeart style={{color:'red'}}/>:<FaRegHeart/>}</p>}
             </div>
         </div>
     )
@@ -139,33 +99,19 @@ const CommentDetails = ({comment,user,postid,getpost,commentreplyfunction}) => {
 export default CommentDetails
 
 const ReplyComment=({replycomment,time,commentId,commentreply,user,postid,getpost})=>{
+
+    const { toGetUserData, forReplyCommentIntraction } = ApiFunctions()
     const [replycommentuser, setreplycommentuser] = useState()
 
-    // Get Reply Comment User
+    /* Get Reply Comment User */
     const ReplyCommentUser = async() => {
-        try {
-            const response = await api.get(`/nivak/media/byuserid/${replycomment?.replyerUserId}/`)
-            setreplycommentuser(response.data)
-        } catch (error) {
-        }
+        setreplycommentuser((await toGetUserData({id: replycomment.replyerUserId})).data.data)
     }
 
-    // Reply Comment Intraction
+    /* Reply Comment Intraction */
     const replycommentIntraction = async () =>{
-        const formData = new FormData()
-        try {
-            formData.append('postid',postid)
-            formData.append('userid',user?.userId)
-            formData.append('commentid',commentId)
-            formData.append('replyid',replycomment?.replyId)
-            const response = await api.post('/nivak/media/replycommentintraction/',formData,{
-                headers: {
-                    'Content-Type' : 'form-data',
-                }
-            })
-            getpost()
-        } catch (error) {
-        }
+        await forReplyCommentIntraction({postId: postid, userId: user.id, commentId: commentId, replyId: replycomment.replyId})
+        getpost(postid)
     }
 
     const commentWithMension = (message) => {
@@ -216,7 +162,7 @@ const ReplyComment=({replycomment,time,commentId,commentreply,user,postid,getpos
 
             {/* Comment Right */}
             <div className='comment_right'>
-                <p onClick={replycommentIntraction}>{replycomment?.replyLikes.includes(user?.userId)  ?<FaHeart style={{color:'red'}}/>:<FaRegHeart/>}</p>
+                <p onClick={replycommentIntraction}>{replycomment?.replyLikes.includes(user?.id)  ?<FaHeart style={{color:'red'}}/>:<FaRegHeart/>}</p>
             </div>
         </div>
     )

@@ -1,13 +1,15 @@
 .verify-content-container{
-    max-width: 350px;
+    display: flex;
     align-items: center;
-    margin-left: 36%;
+    justify-content: center;
     position: relative;
-    margin-top: 100px;
+    width: 100vw;
+    height: 100vh;
 }
 .verify-container{
-    box-shadow: 0px 0px 18px 0px #747474;
-    border-radius: 2px;
+    padding: 30px;
+    box-shadow: 0px 0px 18px 0px var(--alter-color);
+    border-radius: .8rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,12 +23,12 @@
 .verify-container .heading{
     font-size: medium;
     font-weight: 900;
-    color: #747474;
+    color: var(--alter-color);
 }
 .verify-container p{
     width: 260px;
     font-size: 12px;
-    color: #747474;
+    color: var(--alter-color);
     text-align: center;
     margin-bottom: 15px;
 }
@@ -37,7 +39,7 @@
     background-color: #60606060;
 }
 .verify-backlogin-container:hover{
-    box-shadow: 0px 0px 8px 0px #747474;
+    box-shadow: 0px 0px 8px 0px var(--alter-color);
 }
 .verify-backlogin-container a,.verify-backlogin-container button{
     text-decoration: none;
@@ -52,32 +54,31 @@
 .verify-container form input{
     min-width: 260px;
     margin-bottom: 7px;
-    height: 34px;
+    height: 35px;
     outline: none;
-    color: #747474;
-    box-shadow: 0px 0px 1px 0px #747474;
+    color: var(--alter-color);
+    box-shadow: 0px 0px 18px 0px var(--alter-color);
     transition: transform 300ms ease-in-out;
-    border-radius: 2px;
+    border-radius: .4rem;
     border: none;
-    text-indent: 3px;
+    text-indent: 12px;
     background-color: transparent;
 }
 
 .verify-container form input:focus{
-    box-shadow: 0px 0px 8px 0px #747474;
+    box-shadow: 0px 0px 8px 0px var(--alter-color);
     transform: scale(1.05);
 }
 
 .verify-container form input::placeholder{
-    color: #747474;
+    color: var(--alter-color);
     font-size: 11px;
-    text-indent: 3px;
 }
 .verify-container form button{
     margin-top: 10px;
     min-width: 265px;
-    height: 30px;
-    background-color: #0099ff;
+    height: 35px;
+    background-color: var(--button-color);
     outline: none;
     border: none;
     color: white;
@@ -90,22 +91,60 @@
     margin: 0;
 }
 
-.msgError{
-    text-align: center;
-    color: red;
+.verify-container .resendcode{
+    color: var(--button-color);
+    cursor: pointer;
+    text-decoration: none;
 }
 
-@media screen and (max-width: 880px) {
+
+/*----------> BREAKPOINST <----------*/
+
+/* Large devices */
+@media screen and (max-width: 992px){
     
-    .verify-content-container{
-        margin-top: 7%;
-        margin-left: 20%;
+}
+
+/* Medium devices */
+@media screen and (max-width: 768px){
+    
+}
+
+@media screen and (max-width: 576px){
+    .verify-container{
+        padding: 10px 15px;
+    }
+    
+    .verify-container .lock-icon{
+        font-size: 50px;
+    }
+
+    .verify-container .heading{
+        font-size: medium;
+        font-weight: 900;
+    }
+
+    .verify-container p{
+        width: 260px;
+    }
+    .verify-backlogin-container{
+        height: 35px;
+        margin-bottom: 15px;
     }
 }
 
+/* Small devices */
+@media screen and (max-width: 350px){
+    .verify-container{
+        padding: 5px 12px;
+    }
 
-.verify-container .resendcode{
-    color: #0099ff;
-    cursor: pointer;
-    text-decoration: none;
+    .verify-container .heading{
+        font-size: medium;
+        font-weight: 900;
+    }
+
+    .verify-container p{
+        width: 260px;
+    }
 }

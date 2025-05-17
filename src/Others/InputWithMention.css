@@ -1,0 +1,95 @@
+/* Main editable input area */
+.comment-editable {
+    overflow: auto;
+    color: inherit;
+}
+
+/* Placeholder text color when empty */
+.comment-editable.empty {
+}
+
+/* Suggestions list styling */
+.suggestions-list {
+    position: absolute;
+    background: var(--background-color);
+    color: var(--color);
+    border: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 10;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Suggestions list item styling */
+.suggestions-list li {
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* Hover effect for suggestions */
+.suggestions-list li:hover {
+    background: #f0f0f0;
+}
+
+/* Positioning for suggestions */
+.suggestions-list.bottom {
+    top: 100%;
+}
+
+.suggestions-list.top {
+    bottom: 100%;
+}
+
+.suggestions-list.left {
+    right: 100%;
+}
+
+.suggestions-list.right {
+    left: 100%;
+}
+
+/* Mention item styling */
+.mention_top {
+    display: flex;
+    align-items: center;
+}
+
+.mention_top_avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 8px;
+}
+
+.mention_top_avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mention_top_content p {
+    font-weight: bold;
+    margin: 0;
+}
+
+.mention_top_content span {
+    font-size: 12px;
+    color: #666;
+}
+
+.comment-editable.empty:not(:focus)::before {
+    content: attr(data-placeholder);
+    color: #888;
+    position: absolute;
+    top: 0;
+    pointer-events: none;
+}
+

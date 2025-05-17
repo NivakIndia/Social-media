@@ -6,42 +6,24 @@ import { SyncLoader } from 'react-spinners'
 import Cookies from 'js-cookie'
 import FrontPost from './FrontPageMedia/FrontPost'
 import Suggestion from './Suggestion/Suggestion'
+import ApiFunctions from '../../ApiFunctions'
 
 
 const FrontPage = () => {
-  const [loading, setloading] = useState(false)
-  
+  const { toGetFrontPosts } = ApiFunctions()
   const [posts, setposts] = useState()
-  const [user, setuser] = useState()
 
-  // Get Data from api
-  const getData= async () =>{
-    try {
-      const user = await api.get(`/nivak/media/byuserid/${Cookies.get('user')}/`)
-      setuser(user.data)
-      const posts = await api.get('/nivak/media/allpost/')
-      setposts(posts.data)
-      setloading(false)
-    } catch (error) {
-      setloading(false)
-    }
-    
+  // Get posts from api
+  const getPosts= async () =>{
+    setposts((await toGetFrontPosts({id: Cookies.get("_id")})).data.data)
   }
 
-  // use Effects
   useEffect(()=>{
-    setloading(true)
-    getData()
+    getPosts()
   },[])
+  
   return (
     <>
-      <div className='loading' style={loading?{display:'flex'}:{display:'none'}}>
-            <SyncLoader
-            color={'#36d7b7'}
-            loading={loading}
-            />
-      </div>
-
       <div className='frontpage'>
 
           {/* Side Bar div */}
@@ -60,10 +42,9 @@ const FrontPage = () => {
                   <div className='frontpage_left_bottom_cards'>
                     {
                       posts?.reduce((sortedPosts, post) => {
-                          if (post?.userId === user?.userId || user?.userFollowings?.includes(post?.userId)) {
-                            const dateTime = new Date(`${post?.postDate}T${post?.postTime}`).getTime()
-                            sortedPosts.push({ dateTime, post })
-                          }
+                          
+                          const dateTime = new Date(`${post?.postDate}T${post?.postTime}`).getTime()
+                          sortedPosts.push({ dateTime, post })
                           return sortedPosts
                         }, [])
                           .sort((a, b) => b.dateTime - a.dateTime) // Sort based on timestamp in descending order (newest first)

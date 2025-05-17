@@ -1,5 +1,5 @@
 .register-container{
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -10,16 +10,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
+    padding: 10px;
+    border-radius: .8rem;
     height: 450px;
-    width: 300px;
-    box-shadow: 0px 0px 18px 0px #747474;
+    width: 350px;
+    box-shadow: 0px 0px 20px 2px var(--alter-color);
+}
+
+.register-form{
+    width: 100%;
 }
 
 .register-form form{
     margin-top: 15px;
     display: flex;
-    width: 350px;
+    width: 100%;
     height: 350px;
     flex-direction: column;
     align-items: center;
@@ -34,24 +39,29 @@
     flex-direction: row;
 }
 .register-form .userid input{
-    width: 170px;
+    width: 290px;
 }
-.register-form .userid input[type="email"]{
-    font-size: 12px;
+.register-form form .username_field{
+    margin-top: 10px;
+}
+.register-form form .username_field input{
+    width: 210px;
 }
 .register-form form .useridtick-wrong{
     position: relative;
     font-size: 25px;
     left: -3px;
-    top: 5px;
+    top: 6px;
     margin-left: -25px;
 }
 .register-form .userid .code{
     width: 35px;
     border-right: none;
+    border-radius: .4rem 0 0 .4rem;
 }
 .register-form .userid .number{
-    width: 130px;
+    width: 250px;
+    border-radius: 0 .4rem .4rem 0;
 }
 .register-form .userid button{
     width: 70px;
@@ -64,56 +74,182 @@
 .register-datas form input{
     margin-bottom: 10px;
     text-indent: 10px;
-    color: #747474;
-    width: 250px;
-    height: 30px;
-    box-shadow: 0px 0px 1px 0px #747474;
+    color: var(--alter-color);
+    width: 290px;
+    height: 35px;
+    box-shadow: 0px 0px 3px 0px var(--alter-color);
     transition: transform 300ms ease-in-out;
     border: none;
     outline: none;
     background: transparent;
+    border-radius: .4rem;
 }
+
 .register-datas form input:focus{
-    box-shadow: 0px 0px 8px 0px #747474;
+    box-shadow: 0px 0px 12px 0px var(--alter-color);
     transform: scale(1.05);
 }
 .register-form form .tick-wrong{
     position: relative;
     font-size: 25px;
-    left: -15px;
-    top: 8px;
+    left: -10px;
+    top: 6px;
     margin-left: -25px;
 }
 .register-datas form input::placeholder{
-    color: #747474;
+    color: var(--alter-color);
     font-size: 11px;
     text-indent: 10px;
 }
 .register-datas form button{
     margin-top: 10px;
-    margin-bottom: 30px;
-    width: 250px;
-    height: 30px;
-    border-radius: 10px;
+    width: 290px;
+    height: 35px;
+    border-radius: .4rem;
     color: white;
     border: none;
-    background: #0099ff;
+    background: var(--button-color);
 }
 
 .register-container .page-change a{
-    color: #0099ff;
+    color: var(--button-color);
     cursor: pointer;
     text-decoration: none;
-}
-.msgError{
-    text-align: center;
-    color: red;
 }
 
 .register-form p{
     width: 260px;
     font-size: 12px;
-    color: #747474;
+    color: var(--alter-color);
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+
+
+/*----------> BREAKPOINST <----------*/
+
+/* Large devices */
+@media screen and (max-width: 992px){
+    
+}
+
+/* Medium devices */
+@media screen and (max-width: 768px){
+    
+}
+
+@media screen and (max-width: 576px){
+    .register-datas{
+        padding: 10px;
+        border-radius: .5rem;
+        height: 400px;
+        width: 300px;
+    }
+    
+    .register-form form{
+        margin-top: 5px;
+        height: 350px;
+    }
+    
+    .register-form .logo{
+        margin-bottom: 10px;
+    }
+    
+    .register-form .userid input{
+        width: 250px;
+    }
+
+    .register-form form .username_field input{
+        width: 170px;
+    }
+
+    .register-form form .useridtick-wrong{
+        left: -4px;
+    }
+
+    .register-form .userid .number{
+        width: 210px;
+    }
+
+    .register-form .userid button{
+        width: 70px;
+    }
+
+    .register-datas form input{
+        margin-bottom: 8px;
+        width: 250px;
+    }
+
+    .register-form form .tick-wrong{
+        left: -3px;
+    }
+
+    .register-datas form button{
+        width: 250px;
+    }
+
+    .or-field{
+        margin-top: -15px;
+    }
+}
+
+/* Small devices */
+@media screen and (max-width: 350px){
+    .register-datas{
+        padding: 15px;
+        height: 330px;
+        width: 260px;
+    }
+    
+    .register-form form{
+        margin-top: 1px;
+        height: 290px;
+    }
+    
+    .register-form .logo{
+        margin-bottom: 5px;
+    }
+    
+    .register-form .userid input{
+        width: 240px;
+    }
+
+    .register-form form .username_field input{
+        width: 170px;
+    }
+
+    .register-form form .useridtick-wrong{
+        left: -2px;
+    }
+
+    .register-form .userid .number{
+        width: 200px;
+    }
+
+    .register-form .userid button{
+        width: 60px;
+    }
+
+    .register-datas form input{
+        margin-bottom: 6px;
+        width: 240px;
+    }
+
+    .register-form form .tick-wrong{
+        left: -2px;
+    }
+
+    .register-datas form button{
+        width: 240px;
+    }
+
+    .or-field{
+        margin-top: 5px;
+        font-size: 12px;
+    }
+
+    .page-change {
+        font-size: 12px;
+    }
 }
